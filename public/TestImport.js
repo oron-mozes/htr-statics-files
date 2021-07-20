@@ -9,7 +9,7 @@ window.__wixWebComponentRender__ = {
       super();
       this.setAttribute('style', 'display:block')
       this.state = _state;
-      this.#draw();
+      this.#initialDraw();
     }
 
     updateState(newState) {
@@ -19,9 +19,13 @@ window.__wixWebComponentRender__ = {
     render() {
       return "";
     }
-    #draw () {
+    #initialDraw () {
       const jsx = this.render()
       this.replaceChild(new DOMParser().parseFromString(jsx, 'text/html').body.firstChild);
+    }
+    #draw () {
+      const jsx = this.render()
+      this.replaceChild(new DOMParser().parseFromString(jsx, 'text/html').body.firstChild, this.firstChild);
     }
 
   }
