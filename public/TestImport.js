@@ -4,12 +4,17 @@ import {createElement} from './TestImportB.js';
 window.__wixWebComponentRender__ = {
 
   WixHTMLElement: class extends HTMLElement {
-
-    constructor() {
+    state = {};
+    constructor(_state = {}) {
       super();
+      this.state = _state;
       this.#draw();
     }
 
+    updateState(newState) {
+      this.state = {...this.state, ...newState};
+      this.#draw();
+    }
     render() {
       return "";
     }
