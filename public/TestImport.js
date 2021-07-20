@@ -6,7 +6,7 @@ myFunction();
 })()
 
 window.__wixWebComponentRender__ = {
-  WixHTMLElement: class {
+  WixHTMLElement: class extends HTMLElement {
 
     render() {
       console.log('Loaded class!!!!!')
@@ -14,4 +14,4 @@ window.__wixWebComponentRender__ = {
   }
 }
 
-window.dispatchEvent('__wixWebComponentRender__.ready');
+window.dispatchEvent(new CustomEvent('__wixWebComponentRender__.ready'))
