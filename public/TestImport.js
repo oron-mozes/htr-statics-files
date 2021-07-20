@@ -1,10 +1,12 @@
 import {createElement} from './TestImportB.js';
 
-window.__wixWebComponentRender__ = {
   /** @jsx createElement */
+window.__wixWebComponentRender__ = {
+
   WixHTMLElement: class extends HTMLElement {
 
     constructor() {
+      super();
       this.#draw();
     }
 
