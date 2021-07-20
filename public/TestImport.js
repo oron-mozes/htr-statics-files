@@ -1,16 +1,21 @@
-import {myFunction} from './TestImportB.js';
-
-(() => {
-console.log('Module is in the house..')
-myFunction();
-})()
+import {createElement} from './TestImportB.js';
 
 window.__wixWebComponentRender__ = {
+  /** @jsx createElement */
   WixHTMLElement: class extends HTMLElement {
 
-    render() {
-      console.log('Loaded class!!!!!')
+    constructor() {
+      this.#draw();
     }
+
+    render() {
+      return "";
+    }
+    #draw () {
+      const jsx = this.render()
+      this.appendChild(jsx);
+    }
+
   }
 }
 
