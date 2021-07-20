@@ -7,6 +7,7 @@ window.__wixWebComponentRender__ = {
     state = {};
     constructor(_state = {}) {
       super();
+      this.setAttribute('style', 'display:block')
       this.state = _state;
       this.#draw();
     }
