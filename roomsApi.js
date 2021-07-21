@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 })
 router.post('/reserve', (req, res) => {
   // const {metaSiteId, orderId} = JSON.parse(req.body);
-  console.log(':::req.body', req.body)
+  console.log(':::req.body', req.body.metaSiteId)
   // const key = `${metaSiteId}-${1}`;
   // const orders = reservation.get(key) || [];
   // orders.push[orderId]
