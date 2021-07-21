@@ -12,13 +12,14 @@ router.get('/', (req, res) => {
   res.json(rooms);
 })
 router.post('/reserve', (req, res) => {
-  const {metaSiteId, orderId, visitorId} = req.body;
-  const key = `${metaSiteId}-${visitorId}`;
-  const orders = reservation.get(key) || [];
-  console.log('orderId::', metaSiteId, orderId, visitorId, req.body);
-  orders.push(orderId);
-  reservation.set(key, orders);
-  res.json({memberId:visitorId, orders, success: true});
+  // const {metaSiteId, orderId, visitorId} = req.body;
+  // const key = `${metaSiteId}-${visitorId}`;
+  // const orders = reservation.get(key) || [];
+  console.log('orderId::', req.body);
+  res.json({})
+  // orders.push(orderId);
+  // reservation.set(key, orders);
+  // res.json({memberId:visitorId, orders, success: true});
 })
 router.get('/my-orders', (req, res) => {
   const {metaSiteId, visitorId} = req.body;
