@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const rooms = require('./rooms.json') ;
+const roomsData = require('./rooms.json') ;
 
 
 const reservation = new Map([]);
@@ -20,10 +20,10 @@ router.post('/my-orders', (req, res) => {
   const {metaSiteId, visitorId} = req.body;
   const key = `${metaSiteId}-${visitorId}`;
   const orders = reservation.get(key) || [];
-  res.json({orders });
+  res.json({orders: roomsData.rooms.filter(room => orders.includes(room.id)) });
 })
 
 router.get('/', (req, res) => {
-  res.json(rooms);
+  res.json(roomsData);
 })
 module.exports = router
