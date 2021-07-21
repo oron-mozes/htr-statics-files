@@ -22,6 +22,13 @@ router.post('/my-orders', (req, res) => {
   const orders = reservation.get(key) || [];
   res.json({orders: roomsData.rooms.filter(room => orders.includes(room.id)) });
 })
+router.delete('/my-orders', (req, res) => {
+  const {metaSiteId, visitorId, orderId} = req.body;
+  const key = `${metaSiteId}-${visitorId}`;
+  const orders = reservation.get(key).filter(id => id !== orderId) || [];
+  reservation.set(key, orders);
+  res.json({orders: roomsData.rooms.filter(room => orders.includes(room.id)) });
+})
 
 router.get('/', (req, res) => {
   res.json(roomsData);
