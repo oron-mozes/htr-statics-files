@@ -17,6 +17,7 @@ router.post('/reserve', (req, res) => {
   res.json({memberId:visitorId, orders, success: true});
 })
 router.get('/my-orders', (req, res) => {
+  console.log('???????????????', req.body);
   const {metaSiteId, visitorId} = req.body;
   const key = `${metaSiteId}-${visitorId}`;
   const orders = reservation.get(key) || [];
