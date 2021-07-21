@@ -1,17 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const rooms = require('./rooms.json') ;
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 
 const reservation = new Map([]);
-// const bodyParser = require('body-parser')
-// router
-// .use(bodyParser.urlencoded({ extended: true}))
-// .use(bodyParser.json());
 
 router.get('/', (req, res) => {
   res.json(rooms);
 })
-router.post('/reserve', (req, res) => {
+router.post('/reserve', jsonParser, (req, res) => {
   // const {metaSiteId, orderId, visitorId} = req.body;
   // const key = `${metaSiteId}-${visitorId}`;
   // const orders = reservation.get(key) || [];
