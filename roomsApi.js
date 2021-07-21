@@ -10,10 +10,18 @@ router.get('/', (req, res) => {
 router.post('/reserve', (req, res) => {
   const {metaSiteId, orderId, visitorId} = req.body;
   const key = `${metaSiteId}-${visitorId}`;
-  const orders = reservation.get(key) || [];
+  const orders = reservation.has(key) ? reservation.get(key) : [];
   orders.push[orderId]
   reservation.set(key, orders)
   res.json({memberId:visitorId, orders, success: true});
+})
+router.get('/my-orders', (req, res) => {
+  const {metaSiteId, visitorId} = req.body;
+  const key = `${metaSiteId}-${visitorId}`;
+  const orders = reservation.get(key) || [];
+  orders.push[orderId]
+  reservation.set(key, orders)
+  res.json({orders });
 })
 
 
