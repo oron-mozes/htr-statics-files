@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 
 express()
   .use(cors())
+  .use(bodyParser.urlencoded())
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/rooms', roomsApi)
