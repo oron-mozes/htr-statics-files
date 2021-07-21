@@ -7,9 +7,7 @@ const reservation = new Map([]);
 
 router.use(express.json())
 router.use(express.urlencoded())
-router.get('/', (req, res) => {
-  res.json(rooms);
-})
+
 router.post('/reserve', (req, res) => {
   const {metaSiteId, orderId, visitorId} = req.body;
   const key = `${metaSiteId}-${visitorId}`;
@@ -25,5 +23,7 @@ router.get('/my-orders', (req, res) => {
   res.json({orders });
 })
 
-
+router.get('/', (req, res) => {
+  res.json(rooms);
+})
 module.exports = router
