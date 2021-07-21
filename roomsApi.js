@@ -3,10 +3,10 @@ const router = express.Router()
 const rooms = require('./rooms.json') ;
 
 const reservation = new Map([]);
-const bodyParser = require('body-parser')
-router
-.use(bodyParser.urlencoded({ extended: true}))
-.use(bodyParser.json());
+// const bodyParser = require('body-parser')
+// router
+// .use(bodyParser.urlencoded({ extended: true}))
+// .use(bodyParser.json());
 
 router.get('/', (req, res) => {
   res.json(rooms);
