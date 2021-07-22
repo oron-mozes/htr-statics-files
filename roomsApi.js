@@ -32,7 +32,7 @@ router.delete('/my-orders', (req, res) => {
   res.json({orders: roomsData.rooms.filter(room => orders.includes(room.id)) });
 })
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const collection = req.DBManager.db.collection('rooms');
   const rooms = await collection.findAll({});
   console.log('able to get rooms', rooms)
