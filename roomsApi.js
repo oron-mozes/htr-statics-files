@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const roomsData = require('./rooms.json') ;
 const dbConnection = require('./dbConfig.js');
-
+const roomsCollection = 'rooms';
+const ordersCollection = 'orders';
 
 const reservation = new Map([]);
 
@@ -10,32 +10,31 @@ router.use(express.json())
 router.use(express.urlencoded())
 router.use(dbConnection)
 
-router.post('/reserve', (req, res) => {
+router.post('/reserve', async (req, res) => {
   const {metaSiteId, orderId, visitorId} = req.body;
-  const key = `${metaSiteId}-${visitorId}`;
-  const orders = reservation.get(key) || [];
-  orders.push(orderId);
-  reservation.set(key, orders);
-  res.json({memberId:visitorId, orders, success: true});
+  const orderC = req.DBManager.db.collection(ordersCollection);
+  await orderC.findOneAndUpdate({metaSiteId, visitorId, orderId}, {$min: {quantity: 0}, $inc:{quantity: 1}}, {upsert: true})
+  res.json({success: true});
 })
 router.post('/my-orders', (req, res) => {
   const {metaSiteId, visitorId} = req.body;
   const key = `${metaSiteId}-${visitorId}`;
   const orders = reservation.get(key) || [];
-  res.json({orders: roomsData.rooms.filter(room => orders.includes(room.id)) });
+  res.json({orders: []});
 })
 router.delete('/my-orders', (req, res) => {
   const {metaSiteId, visitorId, orderId} = req.body;
-  const key = `${metaSiteId}-${visitorId}`;
-  const orders = reservation.get(key).filter(id => id !== orderId) || [];
-  reservation.set(key, orders);
-  res.json({orders: roomsData.rooms.filter(room => orders.includes(room.id)) });
+  const roomsC = req.DBManager.db.collection(roomsCollection);
+  const rooms = await roomsC.find({}).project({_id:0}).toArray();
+
+  
+  res.json({orders: []});
 })
 
 router.get('/', async (req, res) => {
-  const collection = req.DBManager.db.collection('rooms');
-  const rooms = await collection.find({}).project({_id:0}).toArray();
+  const roomsC = req.DBManager.db.collection(roomsCollection);
+  const rooms = await roomsC.find({}).project({_id:0}).toArray();
   console.log('able to get rooms', rooms)
-  res.json(roomsData);
+  res.json({rooms});
 })
 module.exports = router
