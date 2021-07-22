@@ -34,7 +34,7 @@ router.delete('/my-orders', (req, res) => {
 
 router.get('/', async (req, res) => {
   const collection = req.DBManager.db.collection('rooms');
-  const rooms = await collection.findAll({});
+  const rooms = await collection.find({}).toArray();
   console.log('able to get rooms', rooms)
   res.json(roomsData);
 })
