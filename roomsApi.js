@@ -14,21 +14,24 @@ router.post('/reserve', async (req, res) => {
   const {metaSiteId, orderId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
   await orderC.update({metaSiteId, visitorId, orderId}, { $inc:{quantity: 1}}, {upsert: true})
-  //change to update
   res.json({success: true});
 })
 router.post('/my-orders', async (req, res) => {
   const {metaSiteId, visitorId} = req.body;
-  const key = `${metaSiteId}-${visitorId}`;
-  res.json({orders: []});
+  const orderC = req.DBManager.db.collection(ordersCollection);
+  const orders = await orderC.find({metaSiteId, visitorId}).toArray()
+  res.json({orders});
 })
 router.delete('/my-orders', async (req, res) => {
   const {metaSiteId, visitorId, orderId} = req.body;
-  const roomsC = req.DBManager.db.collection(roomsCollection);
-  const rooms = await roomsC.find({}).project({_id:0}).toArray();
+  const orderC = req.DBManager.db.collection(ordersCollection);
+  await orderC.update({metaSiteId, visitorId, orderId}, { $inc:{quantity: -1}})
+  const order = await orderC.findOne({metaSiteId, visitorId, orderId})
+  if(order.quantity <= 0) {
+    await orderC.remove({metaSiteId, visitorId, orderId})
+  }
 
-  
-  res.json({orders: []});
+  res.json({success: true});
 })
 
 router.get('/', async (req, res) => {
