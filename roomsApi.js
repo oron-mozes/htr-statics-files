@@ -1,12 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const roomsData = require('./rooms.json') ;
+const dbConnection = require('./dbConfig.js');
 
 
 const reservation = new Map([]);
 
 router.use(express.json())
 router.use(express.urlencoded())
+router.use(dbConnection)
 
 router.post('/reserve', (req, res) => {
   const {metaSiteId, orderId, visitorId} = req.body;
