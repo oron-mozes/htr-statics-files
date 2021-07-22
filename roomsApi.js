@@ -22,7 +22,7 @@ router.post('/my-orders', async (req, res) => {
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
-    order.roomDetails = await roomsC.find({roomId: order.orderId}).project({_id:0}).toArray();
+    order.roomDetails = await roomsC.findOne({roomId: order.orderId}).project({_id:0});
     console.log(order)
   }
   res.json({orders});
