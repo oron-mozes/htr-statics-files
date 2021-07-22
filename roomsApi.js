@@ -33,6 +33,9 @@ router.delete('/my-orders', (req, res) => {
 })
 
 router.get('/', (req, res) => {
+  const collection = req.DBManager.db.collection('rooms');
+  const rooms = await collection.findAll({});
+  console.log('able to get rooms', rooms)
   res.json(roomsData);
 })
 module.exports = router
