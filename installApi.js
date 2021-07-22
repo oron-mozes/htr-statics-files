@@ -33,6 +33,8 @@ router.get('/getBackToMe', async (req, res) => {
 router.get('/', async (req, res) => {
  const {token} = req.query;
  console.log('TOKEN:::', token);
-  res.redirect(`${wixInstallerUrl}?${token}&${appId}&${redirectUrl}`);
+ const redirectToWix = `${wixInstallerUrl}?${token}&${appId}&${redirectUrl}`;
+ console.log(':::redirectToWix::', redirectToWix)
+  res.redirect(redirectToWix);
 })
 module.exports = router
