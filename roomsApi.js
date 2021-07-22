@@ -19,7 +19,12 @@ router.post('/reserve', async (req, res) => {
 router.post('/my-orders', async (req, res) => {
   const {metaSiteId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
-  const orders = await orderC.find({metaSiteId, visitorId}).toArray()
+  const orders = await orderC.find({metaSiteId, visitorId}).toArray();
+  const roomsC = req.DBManager.db.collection(roomsCollection);
+  await for (const order in orders) {
+    order.roomDetails = await roomsC.find({roomId: order.orderId}).project({_id:0}).toArray();
+    console.log(order)
+  }
   res.json({orders});
 })
 router.delete('/my-orders', async (req, res) => {
@@ -27,6 +32,7 @@ router.delete('/my-orders', async (req, res) => {
   const orderC = req.DBManager.db.collection(ordersCollection);
   await orderC.update({metaSiteId, visitorId, orderId}, { $inc:{quantity: -1}})
   const order = await orderC.findOne({metaSiteId, visitorId, orderId})
+
   if(order.quantity <= 0) {
     await orderC.remove({metaSiteId, visitorId, orderId})
   }
