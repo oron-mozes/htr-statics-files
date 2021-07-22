@@ -4,8 +4,6 @@ const dbConnection = require('./dbConfig.js');
 const roomsCollection = 'rooms';
 const ordersCollection = 'orders';
 
-const reservation = new Map([]);
-
 router.use(express.json())
 router.use(express.urlencoded())
 router.use(dbConnection)
