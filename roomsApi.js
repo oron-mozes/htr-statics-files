@@ -13,8 +13,8 @@ router.use(dbConnection)
 router.post('/reserve', async (req, res) => {
   const {metaSiteId, orderId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
-  await orderC.findOneAndUpdate({metaSiteId, visitorId, orderId}, {}, {upsert: true})
-  
+  await orderC.update({metaSiteId, visitorId, orderId}, {}, {upsert: true})
+  //change to update
   res.json({success: true});
 })
 router.post('/my-orders', async (req, res) => {
