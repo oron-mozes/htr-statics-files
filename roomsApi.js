@@ -16,13 +16,12 @@ router.post('/reserve', async (req, res) => {
   await orderC.findOneAndUpdate({metaSiteId, visitorId, orderId}, {$min: {quantity: 0}, $inc:{quantity: 1}}, {upsert: true})
   res.json({success: true});
 })
-router.post('/my-orders', (req, res) => {
+router.post('/my-orders', async (req, res) => {
   const {metaSiteId, visitorId} = req.body;
   const key = `${metaSiteId}-${visitorId}`;
-  const orders = reservation.get(key) || [];
   res.json({orders: []});
 })
-router.delete('/my-orders', (req, res) => {
+router.delete('/my-orders', async (req, res) => {
   const {metaSiteId, visitorId, orderId} = req.body;
   const roomsC = req.DBManager.db.collection(roomsCollection);
   const rooms = await roomsC.find({}).project({_id:0}).toArray();
