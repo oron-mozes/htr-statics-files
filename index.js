@@ -7,7 +7,7 @@ const dbConnection = require('./dbConfig.js');
 
 express()
   .use(cors())
-  .use(dbConnection())
+  .use(dbConnection)
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/rooms', roomsApi)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
