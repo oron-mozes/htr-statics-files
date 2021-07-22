@@ -4,7 +4,7 @@ const limitedConnection = "mongodb+srv://oronmozes:<password>@cluster0.qcw5u.mon
 const client = new MongoClient(limitedConnection)
 const dbName = 'htr'
 
-export default async (req, res, next) => {
+module.exports = async (req, res, next) => {
   await client.connect()
   console.log('Connected successfully to server')
   const db = client.db(dbName)
