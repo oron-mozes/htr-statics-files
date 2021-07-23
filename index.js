@@ -7,14 +7,7 @@ const installApi = require('./installApi.js');
 const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
-  .use(cors({origin: '*'}))
-  .use(function (req, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      res.setHeader('Access-Control-Allow-Methods', 'OPTIONS,GET,PUT,POST,DELETE');
-
-      next();
-  })
+  .use(cors({credentials: true}))
   .use('/js', webComponentsApiApi)
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/install', installApi)
