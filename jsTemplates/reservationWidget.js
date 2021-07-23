@@ -68,6 +68,7 @@ function load() {
       fetch(`${baseUrl}/checkout-url?${addInstance()}`, 
         {
           method:'post',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           },
