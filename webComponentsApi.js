@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs');
 
-router.get('/roomsWidget.js', async (req, res) {
+router.get('/roomsWidget.js', async (req, res) => {
 
   const {instanceId} = req.query;
   const content = await fs.readFile('./jsTemplates/roomsWidget.js');
