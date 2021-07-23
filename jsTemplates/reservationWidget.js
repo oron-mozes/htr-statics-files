@@ -70,8 +70,7 @@ function load() {
           method:'post',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Credentials": true
+            'Content-Type': 'application/json'
           },
           credentials: 'include',
           body:JSON.stringify({
