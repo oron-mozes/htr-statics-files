@@ -19,17 +19,17 @@ router.use(dbConnection)
 router.get('/getBackToMe', async (req, res) => {
   const {code, state = 'myState' , instanceId} = req.query;
   console.log('backToMe:::code, state, instanceId', code, state, instanceId);
-  // const installsC = req.DBManager.db.collection(installCollection);
-  // await installsC.update({instanceId}, {}, {upsert: true})
+  
   const response = await axios.post(accessUrl, {
     "grant_type": "authorization_code",
     "client_id": appId,
     "client_secret": appSecret,
     code
   })
-
-  console.log('backToMe:::refresh_token, access_token', response);
-
+  const installsC = req.DBManager.db.collection(installCollection);
+  const {refresh_token, access_token} = response.data;
+  await installsC.update({instanceId, refresh_token, access_token}, {}, {upsert: true})
+  
    res.redirect(`${lastInstallerRedirect}${access_token}`);
  })
 
