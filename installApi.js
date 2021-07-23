@@ -17,9 +17,9 @@ router.use(express.urlencoded())
 router.use(dbConnection)
 
 router.get('/getBackToMe', async (req, res) => {
-  const {code, state, instanceId} = req.query;
+  const {code, state = 'myState' , instanceId} = req.query;
   console.log('backToMe:::code, state, instanceId', code, state, instanceId);
-  const {refresh_token, access_token} = axios.post(accessUrl, {
+  const {refresh_token, access_token} = await axios.post(accessUrl, {
     "grant_type": "authorization_code",
     "client_id": appId,
     "client_secret": appSecret,
@@ -33,7 +33,7 @@ router.get('/getBackToMe', async (req, res) => {
 router.get('/', async (req, res) => {
  const {token} = req.query;
  console.log('TOKEN:::', token);
- const redirectToWix = `${wixInstallerUrl}?token=${token}&appId=${appId}&redirectUrl=${redirectUrl}`;
+ const redirectToWix = `${wixInstallerUrl}?token=${token}&appId=${appId}&redirectUrl=${redirectUrl}&state=${JSON.stringify({test: 'state'})}`;
  console.log(':::redirectToWix::', redirectToWix)
   res.redirect(redirectToWix);
 })
