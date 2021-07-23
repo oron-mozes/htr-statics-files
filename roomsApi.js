@@ -42,7 +42,7 @@ router.delete('/my-orders', async (req, res) => {
   res.json({success: true});
 })
 router.post('/checkout-url', async (req, res) => {
-  console.log('headers?????', req.headers)
+  console.log('headers?????', request.headers.cookie)
 
   const {instanceId, visitorId, metaSiteId} = req.query;
 

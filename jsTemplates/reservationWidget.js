@@ -70,7 +70,8 @@ function load() {
           method:'post',
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Credentials": true
           },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
