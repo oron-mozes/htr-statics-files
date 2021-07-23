@@ -61,7 +61,7 @@ router.post('/checkout-url', async (req, res) => {
 
   })
   const {access_token} = refreshResponse.data;
-  await instalactionC.update({instanceId}, {access_token});
+  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
 
   const createResponse = await axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
     lineItems: orders.map(order => (
