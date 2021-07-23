@@ -7,7 +7,7 @@ const installApi = require('./installApi.js');
 const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
-  .use(cors())
+  .use(cors({origin: '*'}))
   .use(function (req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
