@@ -68,11 +68,12 @@ function load() {
       fetch(`${baseUrl}/checkout-url?${addInstance()}`, 
         {
           method:'post',
-          credentials: 'include',
           headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
             "Access-Control-Allow-Credentials": true
           },
+          credentials: 'include',
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
             visitorId:this.state.visitorId
