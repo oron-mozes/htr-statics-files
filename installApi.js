@@ -18,7 +18,6 @@ router.use(dbConnection)
 
 router.get('/getBackToMe', async (req, res) => {
   const {code, state = 'myState' , instanceId} = req.query;
-  console.log('backToMe:::code, state, instanceId', code, state, instanceId);
   
   const response = await axios.post(accessUrl, {
     "grant_type": "authorization_code",
@@ -29,15 +28,13 @@ router.get('/getBackToMe', async (req, res) => {
   const installsC = req.DBManager.db.collection(installCollection);
   const {refresh_token, access_token} = response.data;
   await installsC.update({instanceId, refresh_token, access_token}, {}, {upsert: true})
-  
+  console.log('access_token::', access_token, response.data);
    res.redirect(`${lastInstallerRedirect}${access_token}`);
  })
 
 router.get('/', async (req, res) => {
  const {token} = req.query;
- console.log('TOKEN:::', token);
  const redirectToWix = `${wixInstallerUrl}?token=${token}&appId=${appId}&redirectUrl=${redirectUrl}&state=${JSON.stringify({test: 'state'})}`;
- console.log(':::redirectToWix::', redirectToWix)
   res.redirect(redirectToWix);
 })
 module.exports = router
