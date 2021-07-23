@@ -42,6 +42,8 @@ router.delete('/my-orders', async (req, res) => {
   res.json({success: true});
 })
 router.post('/checkout-url', async (req, res) => {
+  console.log('headers?????', req.headers)
+
   const {instanceId, visitorId, metaSiteId} = req.query;
 
   const orderC = req.DBManager.db.collection(ordersCollection);
@@ -69,12 +71,14 @@ router.post('/checkout-url', async (req, res) => {
         "id": order.orderId, 
         "quantity": order.quantity, 
         "description" : order.roomDetails.description, 
-        "catalogReference":{
-            appId, 
-            "catalogItemId": order.orderId
-            },
-        "channelType": "UNSPECIFIED"
-    }))
+        "catalogReference":
+        {
+          appId, 
+          "catalogItemId": order.orderId
+        },
+
+    })),
+    "channelType": "UNSPECIFIED"
   }, {
     headers:{
         Authorization: access_token
