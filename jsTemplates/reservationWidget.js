@@ -50,7 +50,6 @@ function load() {
         fetch(`${baseUrl}/my-orders?${addInstance()}`, 
         {
           method:'post',
-          credentials: "same-origin",
           headers: {
             'Content-Type': 'application/json'
           },
@@ -66,6 +65,19 @@ function load() {
     }
 
     doCheckout = () => {
+      fetch(`${baseUrl}/checkout-url?${addInstance()}`, 
+        {
+          method:'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify({
+            metaSiteId: this.state.metaSiteId,
+            visitorId:this.state.visitorId
+          })})
+        .then(data => data.json()).then((ordersData) => {
+          console.log(':::ordersData::', ordersData)
+        }).catch(e => console.error(e))
       // wixDevelopersAnalytics.triggerEvent('htrMessage', {data: {say: `The time is ${new Date().toTimeString()}`}})
     }
 
@@ -107,10 +119,6 @@ function load() {
     connectedCallback() {
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState(data)
-    }
-
-    doCheckout = () => {
-      // wixDevelopersAnalytics.triggerEvent('htrMessage', {data: {say: `The time is ${new Date().toTimeString()}`}})
     }
 
     removeOrder = () =>  {
