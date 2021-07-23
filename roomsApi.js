@@ -7,6 +7,7 @@ const installCollection = 'installs';
 const appId = '7cbc47b3-cfc6-4d20-a13d-40cd1521378b';
 const refreshAccessUrl = 'https://www.wix.com/oauth/access';
 const appSecret = 'f3d6e2dd-3d64-4878-b523-624bd20772c1';
+const axios = require('axios');
 
 router.use(express.json())
 router.use(express.urlencoded())
