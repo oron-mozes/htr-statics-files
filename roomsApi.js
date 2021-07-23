@@ -25,7 +25,6 @@ router.post('/my-orders', async (req, res) => {
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
     order.roomDetails = await roomsC.findOne({roomId: order.orderId});
-    console.log(order)
   }
   res.json({orders});
 })
