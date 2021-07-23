@@ -72,6 +72,7 @@ function load() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
+          credentials: 'include',
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
             visitorId:this.state.visitorId
