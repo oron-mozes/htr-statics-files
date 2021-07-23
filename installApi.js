@@ -27,7 +27,7 @@ router.get('/getBackToMe', async (req, res) => {
   })
   const installsC = req.DBManager.db.collection(installCollection);
   const {refresh_token, access_token} = response.data;
-  await installsC.update({instanceId, refresh_token, access_token}, {}, {upsert: true})
+  await installsC.updateOne({instanceId}, {refresh_token, access_token}, {upsert: true})
   console.log('access_token::', access_token, response.data);
    res.redirect(`${lastInstallerRedirect}${access_token}`);
  })
