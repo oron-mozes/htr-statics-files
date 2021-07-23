@@ -3,7 +3,7 @@ const router = express.Router()
 const axios = require('axios');
 
 const dbConnection = require('./dbConfig.js');
-const installCollection = 'install';
+const installCollection = 'installs';
 
 const wixInstallerUrl = 'https://www.wix.com/installer/install';
 const redirectUrl = 'https://htr-staticfiles.herokuapp.com/_api/install/getBackToMe';
@@ -19,13 +19,16 @@ router.use(dbConnection)
 router.get('/getBackToMe', async (req, res) => {
   const {code, state = 'myState' , instanceId} = req.query;
   console.log('backToMe:::code, state, instanceId', code, state, instanceId);
-  const {refresh_token, access_token} = await axios.post(accessUrl, {
+  // const installsC = req.DBManager.db.collection(installCollection);
+  // await installsC.update({instanceId}, {}, {upsert: true})
+  const response = await axios.post(accessUrl, {
     "grant_type": "authorization_code",
     "client_id": appId,
     "client_secret": appSecret,
     code
   })
-  console.log('backToMe:::refresh_token, access_token', refresh_token, access_token);
+
+  console.log('backToMe:::refresh_token, access_token', response);
 
    res.redirect(`${lastInstallerRedirect}${access_token}`);
  })
