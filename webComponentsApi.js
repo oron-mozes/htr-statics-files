@@ -5,15 +5,12 @@ const fs = require('fs');
 router.get('/roomsWidget.js', async (req, res) => {
 
   const {instanceId} = req.query;
-  fs.readFile('./jsTemplates/roomsWidget.js', (err, data) => {
-    if(err) {
-      console.log(err);
-    }
-    const content = data.replace("{{instanceId}}", instanceId);
-    res.setHeader('content-type', 'text/javascript');
-    res.write(content);
-    res.end();
-  });
+  const content = await fs.readFileSync('./jsTemplates/roomsWidget.js');
+  console.log('::content:: ', content)
+  const finalContent = content.replace("{{instanceId}}", instanceId);
+  res.setHeader('content-type', 'text/javascript');
+  res.write(finalContent);
+  res.end();
 });
 
 module.exports = router
