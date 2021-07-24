@@ -68,6 +68,7 @@ function load() {
       fetch(`${baseUrl}/checkout-url?${addInstance()}`, 
         {
           method:'post',
+          credentials: "include",
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -126,10 +127,6 @@ function load() {
       fetch(`${baseUrl}/my-orders?${addInstance()}`, 
       {
         method:'delete',
-        credentials: "same-origin",
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body:JSON.stringify({
           metaSiteId: this.state.metaSiteId,
           visitorId:this.state.visitorId,
