@@ -42,6 +42,7 @@ router.delete('/my-orders', async (req, res) => {
   res.json({success: true});
 })
 router.post('/checkout-url', async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', true);
   console.log('headers?????', req.headers.cookie)
 
   const {instanceId, visitorId, metaSiteId} = req.query;
