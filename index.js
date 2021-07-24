@@ -9,7 +9,8 @@ const webComponentsApiApi = require('./webComponentsApi.js');
 express()
   // .use(cors({credentials: true,  origin: (origin, callback) => {callback(null, true)}}))
   .use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', req.originalUrl);
+    console.log(req.headers.referer, req.headers.origin)
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
   })
