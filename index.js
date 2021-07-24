@@ -8,7 +8,7 @@ const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
   .use(cors({credentials: true,  origin: '*'}))
-  ,use(function (req, res, next) {
+  .use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     next();
