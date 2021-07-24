@@ -7,7 +7,7 @@ const installApi = require('./installApi.js');
 const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
-  .use(cors({credentials: true}))
+  .use(cors({credentials: true,  origin: '*'}))
   .use('/js', webComponentsApiApi)
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/install', installApi)
