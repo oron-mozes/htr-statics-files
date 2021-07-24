@@ -12,6 +12,7 @@ express()
     console.log(req.headers.referer, req.headers.origin)
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Headers', '*');
     next();
   })
   .use('/js', webComponentsApiApi)
