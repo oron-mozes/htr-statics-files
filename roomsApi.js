@@ -43,8 +43,6 @@ router.delete('/my-orders', async (req, res) => {
   res.json({success: true});
 })
 router.post('/checkout-url', async (req, res) => {
-  console.log('headers?????', req.headers.cookie)
-
   const {instanceId, visitorId, metaSiteId} = req.query;
 
   const orderC = req.DBManager.db.collection(ordersCollection);
@@ -86,7 +84,7 @@ router.post('/checkout-url', async (req, res) => {
     }
   })
 
-  console.log('createResponse:::', createResponse.checkout)
+  console.log('createResponse:::', createResponse)
   // const {id: checkoutId} = createResponse.checkout;
   res.send({})
 });
