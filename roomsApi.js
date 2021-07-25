@@ -23,7 +23,7 @@ router.post('/my-orders', async (req, res) => {
   const {metaSiteId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-  console.log('orders:::', orders, metaSiteId, visitorId)
+  console.log('orders:::', orders,req.body)
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
     order.roomDetails = await roomsC.findOne({roomId: order.orderId});
@@ -82,8 +82,7 @@ router.post('/checkout-url', async (req, res) => {
     "channelType": "UNSPECIFIED"
   }, {
     headers:{
-        Authorization: access_token,
-        visitorId
+        Authorization: access_token
     }
   })
 
