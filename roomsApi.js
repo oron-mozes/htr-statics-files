@@ -20,10 +20,10 @@ router.post('/reserve', async (req, res) => {
   res.json({success: true});
 })
 router.post('/my-orders', async (req, res) => {
+  console.log('orders:::C', req.body)
   const {metaSiteId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-  console.log('orders:::', orders,req.body)
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
     order.roomDetails = await roomsC.findOne({roomId: order.orderId});
