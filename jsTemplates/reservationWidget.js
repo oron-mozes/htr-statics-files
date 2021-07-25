@@ -9,8 +9,9 @@ if (!window.__wixWebComponentRender__) {
 } else {
   load()
 }
+const userInstance = '{{instanceId}}'
 function addInstance() {
-  return 'instanceId={{instanceId}}';
+  return `instanceId=${userInstance}`;
 }
 
 function load() {
@@ -64,11 +65,12 @@ function load() {
     }
 
     doCheckout = () => {
-      fetch(`${baseUrl}/checkout-url?${addInstance()}`, 
+      fetch('https://www.wixapis.com/ecom/v1/checkouts', 
         {
           method:'post',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            authorization: addInstance().replace('instanceId=', '')
           },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
