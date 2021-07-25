@@ -47,7 +47,7 @@ router.post('/checkout-url', async (req, res) => {
 
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-  console.log('::orders::', orders)
+  console.log('::orders::', orders, metaSiteId, visitorId)
 
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
