@@ -61,7 +61,6 @@ function load() {
       fetch(`${baseUrl}/checkout-url?${addInstance()}`, 
         {
           method:'post',
-          credentials: "include",
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
             visitorId:this.state.visitorId
