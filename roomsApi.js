@@ -10,7 +10,7 @@ const appSecret = 'f3d6e2dd-3d64-4878-b523-624bd20772c1';
 const axios = require('axios');
 
 router.use(express.json())
-router.use(express.urlencoded())
+router.use(express.urlencoded({ extended: true }))
 router.use(dbConnection)
 
 router.post('/reserve', async (req, res) => {

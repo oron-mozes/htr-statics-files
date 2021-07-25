@@ -7,18 +7,7 @@ const installApi = require('./installApi.js');
 const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
-  // .use(bp.json())
-  // .use(bp.urlencoded({ extended: true }))
   .use(cors())
-  // .use(function (req, res, next) {
-    
-  //   console.log('orders:::A', req.body)
-  //   res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
-  //   res.setHeader('Access-Control-Allow-Credentials', true);
-  //   res.setHeader('Access-Control-Allow-Headers', '*');
-  //   console.log('orders:::B', req.body)
-  //   next();
-  // })
   .use('/js', webComponentsApiApi)
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/install', installApi)
