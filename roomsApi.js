@@ -63,20 +63,21 @@ router.post('/checkout-url', async (req, res) => {
   })
   const {access_token} = refreshResponse.data;
   await instalactionC.updateOne({instanceId}, {$set: {access_token}});
-
-  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
-    lineItems: orders.map(order => (
+  const lineItems = orders.map(order => (
+    {
+      "id": order.orderId, 
+      "quantity": order.quantity, 
+      "description" : order.roomDetails.description, 
+      "catalogReference":
       {
-        "id": order.orderId, 
-        "quantity": order.quantity, 
-        "description" : order.roomDetails.description, 
-        "catalogReference":
-        {
-          appId, 
-          "catalogItemId": order.orderId
-        },
+        appId, 
+        "catalogItemId": order.orderId
+      },
 
-    })),
+  }));
+  console.log('::lineItems::', lineItems)
+  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+    lineItems,
     "channelType": "UNSPECIFIED"
   }, {
     headers:{
