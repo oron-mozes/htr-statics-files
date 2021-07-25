@@ -62,9 +62,6 @@ function load() {
         {
           method:'post',
           credentials: "include",
-          headers: {
-            'Cookie': document.cookie
-          },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
             visitorId:this.state.visitorId
