@@ -83,6 +83,9 @@ function load() {
       fetch(`${baseUrl}/reserve?${addInstance()}`, 
         {
           method:'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
             orderId: this.state.room.roomId,

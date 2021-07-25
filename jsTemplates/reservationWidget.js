@@ -33,6 +33,9 @@ function load() {
         fetch(`${baseUrl}/my-orders?${addInstance()}`, 
         {
           method:'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body:JSON.stringify({
             metaSiteId: data.metaSiteId,
             visitorId:data.visitorId
@@ -46,6 +49,9 @@ function load() {
         fetch(`${baseUrl}/my-orders?${addInstance()}`, 
         {
           method:'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
             visitorId:this.state.visitorId
@@ -61,6 +67,9 @@ function load() {
       fetch(`${baseUrl}/checkout-url?${addInstance()}`, 
         {
           method:'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
             visitorId:this.state.visitorId
@@ -115,6 +124,9 @@ function load() {
       fetch(`${baseUrl}/my-orders?${addInstance()}`, 
       {
         method:'delete',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body:JSON.stringify({
           metaSiteId: this.state.metaSiteId,
           visitorId:this.state.visitorId,
