@@ -81,11 +81,13 @@ router.post('/checkout-url', async (req, res) => {
     "channelType": "UNSPECIFIED"
   }, {
     headers:{
-        Authorization: access_token
+        Authorization: access_token,
+        visitorId
     }
   })
 
-  console.log('createResponse:::', createResponse)
+  console.log('createResponse:::', createResponse.checkout)
+  // const {id: checkoutId} = createResponse.checkout;
   res.send({})
 });
 router.get('/', async (req, res) => {
