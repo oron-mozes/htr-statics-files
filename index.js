@@ -1,12 +1,13 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
-const  cors = require('cors');
+const  bp = require('body-parser');
 const roomsApi = require('./roomsApi.js');
 const installApi = require('./installApi.js');
 const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
+.use(bp.json())
   // .use(cors({credentials: true,  origin: (origin, callback) => {callback(null, true)}}))
   .use(function (req, res, next) {
     
