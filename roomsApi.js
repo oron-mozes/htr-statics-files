@@ -64,7 +64,7 @@ router.post('/checkout-url', async (req, res) => {
   const {access_token} = refreshResponse.data;
   await instalactionC.updateOne({instanceId}, {$set: {access_token}});
 
-  const createResponse = await axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
     lineItems: orders.map(order => (
       {
         "id": order.orderId, 
@@ -82,11 +82,14 @@ router.post('/checkout-url', async (req, res) => {
     headers:{
         Authorization: access_token
     }
+  }).then(response => {
+    console.log('response::', response);
+    res.send({});
+  }).catch(e => {
+    console.log(e);
+    res.send({});
   })
 
-  console.log('createResponse:::', createResponse)
-  // const {id: checkoutId} = createResponse.checkout;
-  res.send({})
 });
 router.get('/', async (req, res) => {
   const roomsC = req.DBManager.db.collection(roomsCollection);
