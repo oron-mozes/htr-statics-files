@@ -7,7 +7,8 @@ const installApi = require('./installApi.js');
 const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
-.use(bp.json())
+  .use(bp.json())
+  .use(bp.urlencoded({ extended: true }))
   // .use(cors({credentials: true,  origin: (origin, callback) => {callback(null, true)}}))
   .use(function (req, res, next) {
     
