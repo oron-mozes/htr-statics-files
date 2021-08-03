@@ -20,7 +20,6 @@ router.post('/reserve', async (req, res) => {
   res.json({success: true});
 })
 router.post('/my-orders', async (req, res) => {
-  console.log('orders:::C', req.body)
   const {metaSiteId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
@@ -78,7 +77,7 @@ router.post('/checkout-url', async (req, res) => {
       },
 
   }));
-  console.log('::lineItems::', lineItems)
+  
   axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
     lineItems,
     "channelType": "UNSPECIFIED"

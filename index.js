@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 5000
 const  cors = require('cors');
 const roomsApi = require('./roomsApi.js');
 const installApi = require('./installApi.js');
+const catalogSpi = require('./catalogSpi.js');
 const webComponentsApiApi = require('./webComponentsApi.js');
 
 express()
@@ -11,6 +12,7 @@ express()
   .use('/js', webComponentsApiApi)
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/install', installApi)
+  .use('/_api/catalog_spi', catalogSpi)
   .use('/_api/rooms', roomsApi)
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

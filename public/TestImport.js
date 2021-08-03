@@ -1,15 +1,29 @@
-import {createElement} from './TestImportB.js';
 
-  /** @jsx createElement */
 window.__wixWebComponentRender__ = {
 
   WixHTMLElement: class extends HTMLElement {
     state = {};
+    #appToken;
+
     constructor(_state = {}) {
       super();
       this.setAttribute('style', 'display:block')
       this.state = _state;
       this.#initialDraw();
+    }
+
+    async getAppToken() {
+      if(this.#appToken) {
+        return Promise.resolve(this.#appToken)
+      }
+      return new Promise((resolve, reject) => {
+        this.addEventListener('app-token', ({token}) => {
+          this.removeEventListener('app-token');
+          this.#appToken = token;
+          resolve(this.#appToken)
+        })
+        this.dispatchEvent(new CustomEvent('get-app-token', this.state.appId));
+      })
     }
 
     updateState(newState) {
