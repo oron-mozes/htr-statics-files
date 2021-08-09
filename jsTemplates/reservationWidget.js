@@ -26,7 +26,10 @@ function load() {
         window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
       }
     }
-
+    attributeChangedCallback() {
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      this.updateState(wixconfig)
+    }
     connectedCallback() {
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       this.updateState(wixconfig)
