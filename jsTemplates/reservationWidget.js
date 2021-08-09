@@ -27,6 +27,10 @@ function load() {
       }
     }
 
+    connectedCallback() {
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      this.updateState(wixconfig)
+    }
     getEvents = (event, data) => {
 
       if((event === "CustomEvent" && data.eventCategory === "Site members") || event === 'PageView') {
@@ -70,7 +74,7 @@ function load() {
           method:'post',
           headers: {
             'Content-Type': 'application/json',
-            authorization: this.getFromConfig('authorization')
+            authorization: this.state.authorization
           },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
