@@ -22,7 +22,7 @@ function load() {
       if(!window.wixDevelopersAnalytics) {
         window.addEventListener('wixDevelopersAnalyticsReady', () =>  window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents))
       } else {
-        window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
+        window.wixDevelopersAnalytics.register('my-widget-component', this.getEvents)
       }
       fetch(`${baseUrl}?${addInstance()}`).then(response => response.json()).then(roomsData => {
         this.updateState(roomsData)
