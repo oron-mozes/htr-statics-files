@@ -41,30 +41,17 @@ router.delete('/my-orders', async (req, res) => {
 
   res.json({success: true});
 })
-router.post('/checkout-url', async (req, res) => {
-  const {instanceId,} = req.query;
-  const {visitorId, metaSiteId} = req.body;
-
+router.post('/create-cart', async (req, res) => {
+  const {authorization,} = req.headers;
+  const {metaSiteId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-  console.log('::orders::', orders, metaSiteId, visitorId)
-
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
     order.roomDetails = await roomsC.findOne({roomId: order.orderId});
   }
 
-  const instalactionC = req.DBManager.db.collection(installCollection);
-  const installation = await instalactionC.findOne({instanceId});
-  const refreshResponse = await axios.post(refreshAccessUrl, {    
-    "grant_type": "refresh_token",
-    "client_id": appId,
-    "client_secret": appSecret,
-    "refresh_token": installation.refresh_token
-
-  })
-  const {access_token} = refreshResponse.data;
-  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  
   const lineItems = orders.map(order => (
     {
       "id": order.orderId, 
@@ -78,12 +65,12 @@ router.post('/checkout-url', async (req, res) => {
 
   }));
   
-  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+  axios.post('https://www.wixapis.com/ecom/v1/carts', {
     lineItems,
     "channelType": "UNSPECIFIED"
   }, {
     headers:{
-        Authorization: access_token
+        Authorization: authorization
     }
   }).then(response => {
     console.log('response::', response);

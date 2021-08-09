@@ -77,7 +77,7 @@ function load() {
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       const authorization = wixconfig.authorization;
 
-      fetch('https://www.wixapis.com/ecom/v1/checkouts', 
+      fetch(`${baseUrl}/create-cart`, 
         {
           method:'post',
           headers: {
