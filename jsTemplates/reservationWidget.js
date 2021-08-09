@@ -20,6 +20,11 @@ function load() {
   class MyWidgetThatSendsData extends __wixWebComponentRender__.WixHTMLElement {
     constructor() {
       super({orders: []});
+      if(!window.wixDevelopersAnalytics) {
+        window.addEventListener('wixDevelopersAnalyticsReady', () =>  window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents))
+      } else {
+        window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
+      }
     }
 
     getEvents = (event, data) => {

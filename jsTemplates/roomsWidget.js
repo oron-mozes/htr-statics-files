@@ -19,12 +19,16 @@ function load() {
   class MyWidgetNavigateToWebComp extends __wixWebComponentRender__.WixHTMLElement {
     constructor() {
       super({test: 'hello', rooms: []});
-    }
-    onInit() {
+      if(!window.wixDevelopersAnalytics) {
+        window.addEventListener('wixDevelopersAnalyticsReady', () =>  window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents))
+      } else {
+        window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
+      }
       fetch(`${baseUrl}?${addInstance()}`).then(response => response.json()).then(roomsData => {
         this.updateState(roomsData)
       })
     }
+   
     
     getEvents = (event, data) => {
 

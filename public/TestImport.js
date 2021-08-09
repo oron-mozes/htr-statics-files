@@ -10,17 +10,9 @@ window.__wixWebComponentRender__ = {
       this.setAttribute('style', 'display:block')
       this.state = _state;
       this.#initialDraw();
-      if(!window.wixDevelopersAnalytics) {
-        window.addEventListener('wixDevelopersAnalyticsReady', () =>  window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents))
-      } else {
-        window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
-      }
+     
       
     }
-    onInit() {}
-    getEvents(event, data){}
-
-  
 
     getFromConfig(key) {
         return this.#wixConfig[key];
