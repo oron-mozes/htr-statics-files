@@ -10,10 +10,11 @@ window.__wixWebComponentRender__ = {
       this.setAttribute('style', 'display:block')
       this.state = _state;
       this.#initialDraw();
-     
-      
     }
-
+    connectedCallback() {
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      this.updateState(wixconfig)
+    }
     getFromConfig(key) {
         return this.#wixConfig[key];
     }

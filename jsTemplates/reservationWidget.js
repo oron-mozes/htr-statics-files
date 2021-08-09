@@ -30,10 +30,7 @@ function load() {
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       this.updateState(wixconfig)
     }
-    connectedCallback() {
-      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
-      this.updateState(wixconfig)
-    }
+   
     getEvents = (event, data) => {
 
       if((event === "CustomEvent" && data.eventCategory === "Site members") || event === 'PageView') {
@@ -125,6 +122,12 @@ function load() {
     }
 
     connectedCallback() {
+      debugger;
+      const data = JSON.parse(unescape(this.getAttribute('data')))
+      this.updateState(data)
+    }
+    attributeChangedCallback() {
+      debugger;
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState(data)
     }
