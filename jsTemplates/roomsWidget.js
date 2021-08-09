@@ -21,9 +21,9 @@ function load() {
       super({test: 'hello', rooms: []});
     }
     onInit() {
-      fetch(`${baseUrl}?${addInstance()}`).then(response => response.json()).then(roomsData => {
-        this.updateState(roomsData)
-      })
+      // fetch(`${baseUrl}?${addInstance()}`).then(response => response.json()).then(roomsData => {
+      //   this.updateState(roomsData)
+      // })
     }
     getEvents = (event, data) => {
 
