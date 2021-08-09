@@ -2,7 +2,7 @@ if (!window.__wixWebComponentRender__) {
   const moduleScript = document.createElement('script');
   moduleScript.type="module";
   moduleScript.crossorigin="anonymous";
-  moduleScript.integrity="sha384-d/FEXLeYn9vHdDoL/j3nVlc75fScubeyRgXheOJThgCul+Y662bg1xnUajOISx1/"
+  moduleScript.integrity="sha384-Ib7/pYaPYWcixTB8K4GSk7NMyLQscUqHLo8d8yHXtEp4xThNa9HF0qAuF4ibgv+G"
   moduleScript.src="https://htr-staticfiles.herokuapp.com/TestImport.js";
   document.body.append(moduleScript);
   window.addEventListener('__wixWebComponentRender__.ready', load)
