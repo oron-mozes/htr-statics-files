@@ -27,7 +27,6 @@ window.__wixWebComponentRender__ = {
     #initialDraw () {
       const jsx = this.render()
       this.appendChild(new DOMParser().parseFromString(jsx, 'text/html').body.firstChild);
-      this.onInit();
     }
     #draw () {
       const jsx = this.render()
