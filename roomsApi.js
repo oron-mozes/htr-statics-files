@@ -64,7 +64,7 @@ router.post('/create-cart', async (req, res) => {
       },
 
   }));
-  
+  console.log('::::::lineItems', lineItems)
   axios.post('https://www.wixapis.com/ecom/v1/carts', {
     lineItems,
     "channelType": "UNSPECIFIED"
