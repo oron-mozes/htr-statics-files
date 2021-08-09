@@ -69,16 +69,10 @@ function load() {
     }
   
     connectedCallback() {
-      debugger;
-      const data = JSON.parse(unescape(this.getAttribute('data')))
-      this.updateState({room: data.room, visitorId: data.visitorId})
-    
-    }
-    attributeChangedCallback() {
-      debugger;
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState({room: data.room, visitorId: data.visitorId})
     }
+  
     order = () => {
       fetch(`${baseUrl}/reserve?${addInstance()}`, 
         {

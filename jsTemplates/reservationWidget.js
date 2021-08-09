@@ -26,11 +26,16 @@ function load() {
         window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
       }
     }
-    attributeChangedCallback() {
+    connectedCallback() {
+      debugger;
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       this.updateState(wixconfig)
     }
-   
+    attributeChangedCallback() {
+      debugger;
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      this.updateState(wixconfig)
+    }
     getEvents = (event, data) => {
 
       if((event === "CustomEvent" && data.eventCategory === "Site members") || event === 'PageView') {
@@ -121,13 +126,7 @@ function load() {
       super();
     }
 
-    connectedCallback() {
-      debugger;
-      const data = JSON.parse(unescape(this.getAttribute('data')))
-      this.updateState(data)
-    }
-    attributeChangedCallback() {
-      debugger;
+    connectedCallback() { 
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState(data)
     }
