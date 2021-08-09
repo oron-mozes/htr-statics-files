@@ -2,7 +2,7 @@ if (!window.__wixWebComponentRender__) {
   const moduleScript = document.createElement('script');
   moduleScript.type="module";
   moduleScript.crossorigin="anonymous";
-  moduleScript.integrity="sha384-bwU02SizoFebtwa7QUsgrzrk+MsufcJz/z0BJPfJlVwH8WFmnL7WciCbX6/4Ml5I"
+  moduleScript.integrity="sha384-fKs3TXmmHMbn0ez+ixX3uWXyJBGc51wxWCvw7NMpuvN2cf9oFHByE0ukq2+gqaoE"
   moduleScript.src="https://htr-staticfiles.herokuapp.com/TestImport.js";
   document.body.append(moduleScript);
   window.addEventListener('__wixWebComponentRender__.ready', load)
@@ -19,11 +19,6 @@ function load() {
   class MyWidgetNavigateToWebComp extends __wixWebComponentRender__.WixHTMLElement {
     constructor() {
       super({test: 'hello', rooms: []});
-      if(!window.wixDevelopersAnalytics) {
-        window.addEventListener('wixDevelopersAnalyticsReady', () =>  window.wixDevelopersAnalytics.register('my-widget-component', this.getEvents))
-      } else {
-        window.wixDevelopersAnalytics.register('my-widget-component', this.getEvents)
-      }
 
       fetch(`${baseUrl}?${addInstance()}`).then(response => response.json()).then(roomsData => {
         this.updateState(roomsData)
@@ -60,12 +55,6 @@ function load() {
   class RoomView extends __wixWebComponentRender__.WixHTMLElement {
     constructor() {
       super({room: {}, metaSiteId: wixEmbedsAPI.getMetaSiteId()});
-     
-      if(!window.wixDevelopersAnalytics) {
-        window.addEventListener('wixDevelopersAnalyticsReady', () =>  window.wixDevelopersAnalytics.register('my-widget-component', this.getEvents))
-      } else {
-        window.wixDevelopersAnalytics.register('my-widget-component', this.getEvents)
-      }
     }
 
     getEvents = (event, data) => {
@@ -75,7 +64,7 @@ function load() {
       }
       
     }
-    connectedCallback() {
+    connectedCallbackCalled() {
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState({room: data.room, visitorId: data.visitorId})
     }

@@ -3,29 +3,32 @@ window.__wixWebComponentRender__ = {
 
   WixHTMLElement: class extends HTMLElement {
     state = {};
-    #appToken;
+    #wixConfig;
 
     constructor(_state = {}) {
       super();
       this.setAttribute('style', 'display:block')
       this.state = _state;
       this.#initialDraw();
-    }
-
-    async getAppToken() {
-      if(this.#appToken) {
-        return Promise.resolve(this.#appToken)
+      if(!window.wixDevelopersAnalytics) {
+        window.addEventListener('wixDevelopersAnalyticsReady', () =>  window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents))
+      } else {
+        window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
       }
-      return new Promise((resolve, reject) => {
-        this.addEventListener('app-token', ({token}) => {
-          this.removeEventListener('app-token');
-          this.#appToken = token;
-          resolve(this.#appToken)
-        })
-        this.dispatchEvent(new CustomEvent('get-app-token', this.state.appId));
-      })
     }
 
+    getEvents = (event, data) => {}
+
+    connectedCallback() {
+      this.#wixConfig = JSON.parse(this?.attributes?.wixconfig?.value);
+      this.connectedCallbackCalled();
+    }
+
+    connectedCallbackCalled() {}
+    
+    getFromConfig(key) {
+        return this.#wixConfig[key];
+    }
     updateState(newState) {
       this.state = {...this.state, ...newState};
       this.#draw();
