@@ -15,9 +15,10 @@ window.__wixWebComponentRender__ = {
       } else {
         window.wixDevelopersAnalytics.register('my-widget-notify-component', this.getEvents)
       }
+      
     }
-
-    getEvents = (event, data) => {}
+    onInit() {}
+    getEvents(event, data){}
 
     connectedCallback() {
       this.#wixConfig = JSON.parse(this?.attributes?.wixconfig?.value);
@@ -25,7 +26,7 @@ window.__wixWebComponentRender__ = {
     }
 
     connectedCallbackCalled() {}
-    
+
     getFromConfig(key) {
         return this.#wixConfig[key];
     }
@@ -39,6 +40,7 @@ window.__wixWebComponentRender__ = {
     #initialDraw () {
       const jsx = this.render()
       this.appendChild(new DOMParser().parseFromString(jsx, 'text/html').body.firstChild);
+      this.onInit();
     }
     #draw () {
       const jsx = this.render()
