@@ -74,12 +74,15 @@ function load() {
     }
 
     doCheckout = () => {
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      const authorization = wixconfig.authorization;
+
       fetch('https://www.wixapis.com/ecom/v1/checkouts', 
         {
           method:'post',
           headers: {
             'Content-Type': 'application/json',
-            authorization: this.state.authorization
+            authorization
           },
           body:JSON.stringify({
             metaSiteId: this.state.metaSiteId,
