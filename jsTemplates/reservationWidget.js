@@ -112,7 +112,7 @@ function load() {
       super();
     }
 
-    connectedCallbackCalled() {
+    connectedCallback() {
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState(data)
     }

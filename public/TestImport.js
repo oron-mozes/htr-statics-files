@@ -20,12 +20,7 @@ window.__wixWebComponentRender__ = {
     onInit() {}
     getEvents(event, data){}
 
-    connectedCallback() {
-      this.#wixConfig = JSON.parse(this?.attributes?.wixconfig?.value);
-      this.connectedCallbackCalled();
-    }
-
-    connectedCallbackCalled() {}
+  
 
     getFromConfig(key) {
         return this.#wixConfig[key];

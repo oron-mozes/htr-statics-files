@@ -25,6 +25,7 @@ function load() {
         this.updateState(roomsData)
       })
     }
+    
     getEvents = (event, data) => {
 
       if((event === "CustomEvent" && data.eventCategory === "Site members") || event === 'PageView') {
@@ -58,16 +59,16 @@ function load() {
     }
 
     getEvents = (event, data) => {
-
       if((event === "CustomEvent" && data.eventCategory === "Site members") || event === 'PageView') {
         this.updateState(data)
       }
-      
     }
-    connectedCallbackCalled() {
+  
+    connectedCallback() {
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState({room: data.room, visitorId: data.visitorId})
     }
+
     order = () => {
       fetch(`${baseUrl}/reserve?${addInstance()}`, 
         {
