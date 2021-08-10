@@ -45,14 +45,14 @@ router.delete('/my-orders', async (req, res) => {
 router.get('/checkout-url', async (req, res) => {
   const {instanceId, visitorId, metaSiteId} = req.query;
 
-  const orderC = req.DBManager.db.collection(ordersCollection);
-  const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-  console.log('::orders::', orders, metaSiteId, visitorId)
+  // const orderC = req.DBManager.db.collection(ordersCollection);
+  // const orders = await orderC.find({metaSiteId, visitorId}).toArray();
+  // console.log('::orders::', orders, metaSiteId, visitorId)
 
-  const roomsC = req.DBManager.db.collection(roomsCollection);
-  for (const order of orders) {
-    order.roomDetails = await roomsC.findOne({roomId: order.orderId});
-  }
+  // const roomsC = req.DBManager.db.collection(roomsCollection);
+  // for (const order of orders) {
+  //   order.roomDetails = await roomsC.findOne({roomId: order.orderId});
+  // }
 
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.findOne({instanceId});
