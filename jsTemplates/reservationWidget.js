@@ -90,8 +90,6 @@ function load() {
       fetch('https://www.wixapis.com/ecom/v1/checkouts', 
         {
           method:'post',
-          mode: 'no-cors',
-          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             authorization
