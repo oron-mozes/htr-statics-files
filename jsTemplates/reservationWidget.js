@@ -81,7 +81,7 @@ function load() {
           "description" : order.roomDetails.description, 
           "catalogReference":
           {
-            appId, 
+            appId:'7cbc47b3-cfc6-4d20-a13d-40cd1521378b', 
             "catalogItemId": order.orderId
           },
     
