@@ -41,7 +41,61 @@ router.delete('/my-orders', async (req, res) => {
 
   res.json({success: true});
 })
-router.post('/create-cart', async (req, res) => {
+
+router.post('/checkout-url', async (req, res) => {
+  const {instanceId, visitorId, metaSiteId} = req.query;
+
+  const orderC = req.DBManager.db.collection(ordersCollection);
+  const orders = await orderC.find({metaSiteId, visitorId}).toArray();
+  console.log('::orders::', orders, metaSiteId, visitorId)
+
+  const roomsC = req.DBManager.db.collection(roomsCollection);
+  for (const order of orders) {
+    order.roomDetails = await roomsC.findOne({roomId: order.orderId});
+  }
+
+  const instalactionC = req.DBManager.db.collection(installCollection);
+  const installation = await instalactionC.findOne({instanceId});
+  const refreshResponse = await axios.post(refreshAccessUrl, {    
+    "grant_type": "refresh_token",
+    "client_id": appId,
+    "client_secret": appSecret,
+    "refresh_token": installation.refresh_token
+
+  })
+  const {access_token} = refreshResponse.data;
+  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  const lineItems = orders.map(order => (
+    {
+      "id": order.orderId, 
+      "quantity": order.quantity, 
+      "description" : order.roomDetails.description, 
+      "catalogReference":
+      {
+        appId, 
+        "catalogItemId": order.orderId
+      },
+
+  }));
+  console.log('::lineItems::', lineItems)
+  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+    lineItems,
+    "channelType": "UNSPECIFIED"
+  }, {
+    headers:{
+        Authorization: access_token
+    }
+  }).then(response => {
+    console.log('response::', response);
+    res.send({});
+  }).catch(e => {
+    console.log(e);
+    res.send({});
+  })
+
+});
+
+router.post('/create-checkouts', async (req, res) => {
   const {authorization,} = req.headers;
   const {metaSiteId, visitorId} = req.body;
   const orderC = req.DBManager.db.collection(ordersCollection);
@@ -51,7 +105,6 @@ router.post('/create-cart', async (req, res) => {
     order.roomDetails = await roomsC.findOne({roomId: order.orderId});
   }
 
-  
   const lineItems = orders.map(order => (
     {
       "id": order.orderId, 

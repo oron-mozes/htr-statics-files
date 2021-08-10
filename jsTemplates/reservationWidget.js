@@ -86,10 +86,11 @@ function load() {
           },
     
       }));
-      // fetch(`${baseUrl}/create-cart`,
+      // fetch(`${baseUrl}/create-checkouts`,
       fetch('https://www.wixapis.com/ecom/v1/checkouts', 
         {
           method:'post',
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
             authorization
