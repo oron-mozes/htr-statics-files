@@ -63,10 +63,11 @@ router.get('/checkout-url', async (req, res) => {
     "refresh_token": installation.refresh_token
 
   })
-  res.json(refreshResponse);
   
-  // const {access_token} = refreshResponse.data;
-  // await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  const {access_token} = refreshResponse.data;
+  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  res.json({done: tur});
+
   // const lineItems = orders.map(order => (
   //   {
   //     "id": order.orderId, 
