@@ -91,6 +91,7 @@ function load() {
         {
           method:'post',
           mode: 'no-cors',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             authorization
