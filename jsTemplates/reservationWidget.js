@@ -27,12 +27,10 @@ function load() {
       }
     }
     connectedCallback() {
-      debugger;
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       this.updateState(wixconfig)
     }
     attributeChangedCallback() {
-      debugger;
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       this.updateState(wixconfig)
     }
