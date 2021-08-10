@@ -63,35 +63,37 @@ router.post('/checkout-url', async (req, res) => {
     "refresh_token": installation.refresh_token
 
   })
-  const {access_token} = refreshResponse.data;
-  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
-  const lineItems = orders.map(order => (
-    {
-      "id": order.orderId, 
-      "quantity": order.quantity, 
-      "description" : order.roomDetails.description, 
-      "catalogReference":
-      {
-        appId, 
-        "catalogItemId": order.orderId
-      },
+  res.json(refreshResponse);
+  
+  // const {access_token} = refreshResponse.data;
+  // await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  // const lineItems = orders.map(order => (
+  //   {
+  //     "id": order.orderId, 
+  //     "quantity": order.quantity, 
+  //     "description" : order.roomDetails.description, 
+  //     "catalogReference":
+  //     {
+  //       appId, 
+  //       "catalogItemId": order.orderId
+  //     },
 
-  }));
-  console.log('::lineItems::', lineItems)
-  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
-    lineItems,
-    "channelType": "UNSPECIFIED"
-  }, {
-    headers:{
-        Authorization: access_token
-    }
-  }).then(response => {
-    console.log('response::', response);
-    res.send({});
-  }).catch(e => {
-    console.log(e);
-    res.send({});
-  })
+  // }));
+  // console.log('::lineItems::', lineItems)
+  // axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+  //   lineItems,
+  //   "channelType": "UNSPECIFIED"
+  // }, {
+  //   headers:{
+  //       Authorization: access_token
+  //   }
+  // }).then(response => {
+  //   console.log('response::', response);
+  //   res.send({});
+  // }).catch(e => {
+  //   console.log(e);
+  //   res.send({});
+  // })
 
 });
 
