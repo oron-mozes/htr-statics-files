@@ -74,8 +74,20 @@ function load() {
     doCheckout = () => {
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       const authorization = wixconfig.authorization;
-
-      fetch(`${baseUrl}/create-cart`, 
+      const lineItems = this.state.orders.map(order => (
+        {
+          "id": order.orderId, 
+          "quantity": order.quantity, 
+          "description" : order.roomDetails.description, 
+          "catalogReference":
+          {
+            appId, 
+            "catalogItemId": order.orderId
+          },
+    
+      }));
+      // fetch(`${baseUrl}/create-cart`,
+      fetch('https://www.wixapis.com/ecom/v1/checkouts', 
         {
           method:'post',
           headers: {
@@ -83,8 +95,9 @@ function load() {
             authorization
           },
           body:JSON.stringify({
-            metaSiteId: this.state.metaSiteId,
-            visitorId:this.state.visitorId
+            // metaSiteId: this.state.metaSiteId,
+            // visitorId:this.state.visitorId
+            lineItems
           })})
         .then(data => data.json()).then((ordersData) => {
           console.log(':::ordersData::', ordersData)
