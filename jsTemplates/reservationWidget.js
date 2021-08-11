@@ -87,7 +87,7 @@ function load() {
     
       }));
       // fetch(`${baseUrl}/create-checkouts`,
-      fetch('https://www.wixapis.com/ecom/v1/checkouts', 
+      fetch('/ecom/v1/checkouts', 
         {
           method:'post',
           headers: {
