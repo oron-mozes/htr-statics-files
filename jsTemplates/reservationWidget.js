@@ -98,7 +98,7 @@ function load() {
             // metaSiteId: this.state.metaSiteId,
             // visitorId:this.state.visitorId
             lineItems,
-            "channelType": "UNSPECIFIED"
+            "channelType": "WEB"
           })})
         .then(data => data.json()).then((ordersData) => {
           console.log(':::ordersData::', ordersData)
