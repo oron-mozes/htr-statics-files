@@ -97,7 +97,8 @@ function load() {
           body:JSON.stringify({
             // metaSiteId: this.state.metaSiteId,
             // visitorId:this.state.visitorId
-            lineItems
+            lineItems,
+            "channelType": "UNSPECIFIED"
           })})
         .then(data => data.json()).then((ordersData) => {
           console.log(':::ordersData::', ordersData)
