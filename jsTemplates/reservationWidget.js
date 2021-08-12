@@ -72,8 +72,8 @@ function load() {
     }
 
     doCheckout = () => {
-      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
-      const authorization = wixconfig.authorization;
+      
+      const authorization = window.wixEmbedsAPI.getAppToken('7cbc47b3-cfc6-4d20-a13d-40cd1521378b');
       const lineItems = this.state.orders.map(order => (
         {
           "id": order.orderId, 
@@ -95,8 +95,6 @@ function load() {
             authorization
           },
           body:JSON.stringify({
-            // metaSiteId: this.state.metaSiteId,
-            // visitorId:this.state.visitorId
             lineItems,
             "channelType": "WEB"
           })})
