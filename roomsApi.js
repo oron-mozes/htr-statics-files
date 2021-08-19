@@ -43,7 +43,7 @@ router.delete('/my-orders', async (req, res) => {
 })
 
 router.post('/checkout-url', async (req, res) => {
-  const {instanceId, visitorId, metaSiteId} = req.query;
+  const {instanceId, visitorId, metaSiteId} = req.body;
  
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
