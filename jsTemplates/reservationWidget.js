@@ -108,8 +108,7 @@ function load() {
         {
           method:'post',
           headers: {
-            'Content-Type': 'application/json',
-            authorization
+            'Content-Type': 'application/json'
           },
           body:JSON.stringify({
             instanceId: userInstance
@@ -124,8 +123,7 @@ function load() {
         {
           method:'post',
           headers: {
-            'Content-Type': 'application/json',
-            authorization
+            'Content-Type': 'application/json'
           },
           body:JSON.stringify({
             instanceId: userInstance
