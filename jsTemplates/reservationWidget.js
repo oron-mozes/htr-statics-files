@@ -86,8 +86,8 @@ function load() {
           },
     
       }));
-      // fetch(`${baseUrl}/create-checkouts`,
-      fetch('/ecom/v1/checkouts', 
+      fetch(`${baseUrl}/checkout-url`,
+      // fetch('/ecom/v1/checkouts', 
         {
           method:'post',
           headers: {
@@ -95,8 +95,9 @@ function load() {
             authorization
           },
           body:JSON.stringify({
-            lineItems,
-            "channelType": "WEB"
+            metaSiteId: this.state.metaSiteId,
+            visitorId:this.state.visitorId,
+            instanceId: userInstance
           })})
         .then(data => data.json()).then((ordersData) => {
           console.log(':::ordersData::', ordersData)

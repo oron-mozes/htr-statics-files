@@ -45,14 +45,13 @@ router.delete('/my-orders', async (req, res) => {
 router.get('/checkout-url', async (req, res) => {
   const {instanceId, visitorId, metaSiteId} = req.query;
 
-  // const orderC = req.DBManager.db.collection(ordersCollection);
-  // const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-  // console.log('::orders::', orders, metaSiteId, visitorId)
+  const orderC = req.DBManager.db.collection(ordersCollection);
+  const orders = await orderC.find({metaSiteId, visitorId}).toArray();
 
-  // const roomsC = req.DBManager.db.collection(roomsCollection);
-  // for (const order of orders) {
-  //   order.roomDetails = await roomsC.findOne({roomId: order.orderId});
-  // }
+  const roomsC = req.DBManager.db.collection(roomsCollection);
+  for (const order of orders) {
+    order.roomDetails = await roomsC.findOne({roomId: order.orderId});
+  }
 
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.findOne({instanceId});
@@ -66,35 +65,38 @@ router.get('/checkout-url', async (req, res) => {
   
   const {access_token} = refreshResponse.data;
   await instalactionC.updateOne({instanceId}, {$set: {access_token}});
-  res.json({done: true});
+  
 
-  // const lineItems = orders.map(order => (
-  //   {
-  //     "id": order.orderId, 
-  //     "quantity": order.quantity, 
-  //     "description" : order.roomDetails.description, 
-  //     "catalogReference":
-  //     {
-  //       appId, 
-  //       "catalogItemId": order.orderId
-  //     },
+  const lineItems = orders.map(order => (
+    {
+      "id": order.orderId, 
+      "quantity": order.quantity, 
+      "description" : order.roomDetails.description, 
+      "catalogReference":
+      {
+        appId, 
+        "catalogItemId": order.orderId
+      },
 
-  // }));
-  // console.log('::lineItems::', lineItems)
-  // axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
-  //   lineItems,
-  //   "channelType": "UNSPECIFIED"
-  // }, {
-  //   headers:{
-  //       Authorization: access_token
-  //   }
-  // }).then(response => {
-  //   console.log('response::', response);
-  //   res.send({});
-  // }).catch(e => {
-  //   console.log(e);
-  //   res.send({});
-  // })
+  }));
+  
+  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+    checkoutInfo:{
+      customFields:[{value: visitorId, title: 'visitorId'}]
+    },
+    lineItems,
+    "channelType": "WEB"
+  }, {
+    headers:{
+        Authorization: access_token
+    }
+  }).then(response => {
+    console.log('response::', response);
+    res.send({});
+  }).catch(e => {
+    console.log(e);
+    res.send({});
+  })
 
 });
 
