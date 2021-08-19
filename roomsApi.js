@@ -55,7 +55,7 @@ router.post('/checkout-url', async (req, res) => {
  
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.find({instanceId}).toArray();
-  console.log('installation:::', installation)
+  console.log('installation:::', instanceId)
   const refreshResponse = await axios.post(refreshAccessUrl, {    
     "grant_type": "refresh_token",
     "client_id": appId,
