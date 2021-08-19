@@ -81,27 +81,16 @@ router.post('/checkout-url', async (req, res) => {
       },
 
   }));
-  //https://wix.slack.com/archives/CRHHL21DG/p1626335562120700
-  // axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
-  //   checkoutInfo:{
-  //     customFields:[{value: visitorId, title: 'visitorId'}]
-  //   },
-  //   lineItems,
-  //   "channelType": "WEB"
-  // }, {
-  //   headers:{
-  //       Authorization: authorization
-  //   }
-  // }).then(response => {
-  //   console.log('response::', response);
-  //   res.send({});
-  // }).catch(e => {
-  //   console.log(e);
-  //   res.send({});
-  // })
-  axios.get('https://www.wixapis.com/apps/v1/instance', {
+  // https://wix.slack.com/archives/CRHHL21DG/p1626335562120700
+  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+    checkoutInfo:{
+      customFields:[{value: visitorId, title: 'visitorId'}]
+    },
+    lineItems,
+    "channelType": "WEB"
+  }, {
     headers:{
-        Authorization: access_token
+        Authorization: authorization
     }
   }).then(response => {
     console.log('response::', response);
@@ -111,7 +100,58 @@ router.post('/checkout-url', async (req, res) => {
     res.send({});
   })
 
+
 });
+router.get('/test-instance', () => {
+  const instalactionC = req.DBManager.db.collection(installCollection);
+  const installation = await instalactionC.find({instanceId}).toArray();
+  const refreshResponse = await axios.post(refreshAccessUrl, {    
+    "grant_type": "refresh_token",
+    "client_id": appId,
+    "client_secret": appSecret,
+    "refresh_token": installation[0].refresh_token
+
+  })
+
+  const {access_token} = refreshResponse.data;
+  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  
+  axios.get('https://www.wixapis.com/apps/v1/instance', {
+    headers:{
+        Authorization: access_token
+    }
+  }).then(response => {
+    res.send(response);
+  }).catch(e => {
+    console.log(e);
+    res.send({});
+  })
+});
+router.get('/fake-collection', () => {
+  const instalactionC = req.DBManager.db.collection(installCollection);
+  const installation = await instalactionC.find({instanceId}).toArray();
+  const refreshResponse = await axios.post(refreshAccessUrl, {    
+    "grant_type": "refresh_token",
+    "client_id": appId,
+    "client_secret": appSecret,
+    "refresh_token": installation[0].refresh_token
+
+  })
+
+  const {access_token} = refreshResponse.data;
+  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  
+  axios.get('https://www.wixapis.com/stores/v1/collections/00000000-000000-000000-000000000001', {
+    headers:{
+        Authorization: access_token
+    }
+  }).then(response => {
+    res.send(response);
+  }).catch(e => {
+    console.log(e);
+    res.send({});
+  })
+})
 
 router.post('/create-checkouts', async (req, res) => {
   const {authorization,} = req.headers;
