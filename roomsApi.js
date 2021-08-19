@@ -44,15 +44,15 @@ router.delete('/my-orders', async (req, res) => {
 
 router.get('/checkout-url', async (req, res) => {
   const {instanceId, visitorId, metaSiteId} = req.query;
-
+  console.log(1)
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-
+  console.log(2)
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
     order.roomDetails = await roomsC.findOne({roomId: order.orderId});
   }
-
+  console.log(3)
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.findOne({instanceId});
   const refreshResponse = await axios.post(refreshAccessUrl, {    
@@ -62,11 +62,11 @@ router.get('/checkout-url', async (req, res) => {
     "refresh_token": installation.refresh_token
 
   })
-  
+  console.log(4)
   const {access_token} = refreshResponse.data;
   await instalactionC.updateOne({instanceId}, {$set: {access_token}});
   
-
+  console.log(5)
   const lineItems = orders.map(order => (
     {
       "id": order.orderId, 
@@ -79,7 +79,7 @@ router.get('/checkout-url', async (req, res) => {
       },
 
   }));
-  
+  console.log(6)
   axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
     checkoutInfo:{
       customFields:[{value: visitorId, title: 'visitorId'}]
@@ -124,7 +124,7 @@ router.post('/create-checkouts', async (req, res) => {
   }));
   axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
     lineItems,
-    "channelType": "UNSPECIFIED"
+    "channelType": "WEB"
   }, {
     headers:{
         Authorization: authorization
