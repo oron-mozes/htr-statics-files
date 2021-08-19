@@ -82,15 +82,26 @@ router.post('/checkout-url', async (req, res) => {
 
   }));
   //https://wix.slack.com/archives/CRHHL21DG/p1626335562120700
-  axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
-    checkoutInfo:{
-      customFields:[{value: visitorId, title: 'visitorId'}]
-    },
-    lineItems,
-    "channelType": "WEB"
-  }, {
+  // axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
+  //   checkoutInfo:{
+  //     customFields:[{value: visitorId, title: 'visitorId'}]
+  //   },
+  //   lineItems,
+  //   "channelType": "WEB"
+  // }, {
+  //   headers:{
+  //       Authorization: authorization
+  //   }
+  // }).then(response => {
+  //   console.log('response::', response);
+  //   res.send({});
+  // }).catch(e => {
+  //   console.log(e);
+  //   res.send({});
+  // })
+  axios.get('https://www.wixapis.com/apps/v1/instance', {
     headers:{
-        Authorization: 'bBcy7Z6YOEKinxHcYqo7GWpIZWn2qw_O9bayHrxsaAs.eyJpbnN0YW5jZUlkIjoiNTY1YzU5YjUtMjU5Ny00YzBhLTg1MzUtNGM5MzdjNjZiOTRiIiwiYXBwRGVmSWQiOiIxMzgwYjcwMy1jZTgxLWZmMDUtZjExNS0zOTU3MWQ5NGRmY2QiLCJtZXRhU2l0ZUlkIjoiNWRlZTAxOWUtM2ZiZC00ZDc0LWJlZDQtMjRjNjRlOWIxM2UxIiwic2lnbkRhdGUiOiIyMDIxLTA4LTE5VDEyOjEzOjU1Ljg4M1oiLCJ2ZW5kb3JQcm9kdWN0SWQiOiJzdG9yZXNfZ29sZCIsImRlbW9Nb2RlIjpmYWxzZSwiYWlkIjoiNzExNDcwZmQtMzMzZS00NDM5LThkYjUtYzJiNTg5NDRkNjFmIiwiYmlUb2tlbiI6IjBiYjI1ODJiLTFhMmEtMDE3ZS0zYmUxLTY4NTUzMmZkYWFhYSIsInNpdGVPd25lcklkIjoiMzI5OTk4ZDYtMzc2Yi00NTZkLTlmODQtMGIwOWQ1MGNhMDYwIn0'
+        Authorization: authorization
     }
   }).then(response => {
     console.log('response::', response);
