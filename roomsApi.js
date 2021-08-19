@@ -63,8 +63,9 @@ router.post('/checkout-url', async (req, res) => {
     "refresh_token": installation[0].refresh_token
 
   })
-  console.log(4)
+
   const {access_token} = refreshResponse.data;
+  console.log({token: access_token})
   await instalactionC.updateOne({instanceId}, {$set: {access_token}});
   
   console.log(5)
