@@ -122,10 +122,10 @@ router.post('/test-instance', async (req, res) => {
         Authorization: access_token
     }
   }).then(response => {
-    res.send(response);
+    res.json(response.data);
   }).catch(e => {
     console.log(e);
-    res.send({});
+    res.send({e});
   })
 });
 router.post('/fake-collection', async (req, res) => {
@@ -148,10 +148,10 @@ router.post('/fake-collection', async (req, res) => {
         Authorization: access_token
     }
   }).then(response => {
-    res.send(response);
+    res.json(response.data);
   }).catch(e => {
     console.log(e);
-    res.send({});
+    res.send({e});
   })
 })
 
