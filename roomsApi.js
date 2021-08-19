@@ -102,7 +102,8 @@ router.post('/checkout-url', async (req, res) => {
 
 
 });
-router.get('/test-instance', () => {
+router.post('/test-instance', () => {
+  const {instanceId} = req.body;
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.find({instanceId}).toArray();
   const refreshResponse = await axios.post(refreshAccessUrl, {    
@@ -127,7 +128,8 @@ router.get('/test-instance', () => {
     res.send({});
   })
 });
-router.get('/fake-collection', () => {
+router.post('/fake-collection', () => {
+  const {instanceId} = req.body;
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.find({instanceId}).toArray();
   const refreshResponse = await axios.post(refreshAccessUrl, {    

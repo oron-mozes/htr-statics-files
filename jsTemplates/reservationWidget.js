@@ -87,7 +87,6 @@ function load() {
     
       }));
       fetch(`${baseUrl}/checkout-url`,
-      // fetch('/ecom/v1/checkouts', 
         {
           method:'post',
           headers: {
@@ -102,9 +101,39 @@ function load() {
         .then(data => data.json()).then((ordersData) => {
           console.log(':::ordersData::', ordersData)
         }).catch(e => console.error(e))
-      // wixDevelopersAnalytics.triggerEvent('htrMessage', {data: {say: `The time is ${new Date().toTimeString()}`}})
     }
 
+    doCollection = () => {
+      fetch(`${baseUrl}/fake-collection`,
+        {
+          method:'post',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization
+          },
+          body:JSON.stringify({
+            instanceId: userInstance
+          })})
+        .then(data => data.json()).then((response) => {
+          console.log(':::collection::', response)
+        }).catch(e => console.error(e))
+    }
+
+    doInstance = () => {
+      fetch(`${baseUrl}/test-instance`,
+        {
+          method:'post',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization
+          },
+          body:JSON.stringify({
+            instanceId: userInstance
+          })})
+        .then(data => data.json()).then((response) => {
+          console.log(':::instance ::', response)
+        }).catch(e => console.error(e))
+    }
     render() {
      
       return `
@@ -130,6 +159,18 @@ function load() {
             font-size: 20px;
             margin-top: 50px;"
             onclick="this.closest('my-widget-notify-component').doCheckout()">Complete Order</button>
+            <button 
+            style="background: cadetblue;
+            line-height: 200%;
+            font-size: 20px;
+            margin-top: 50px;"
+            onclick="this.closest('my-widget-notify-component').doCollection()">Fake Collection</button>
+            <button 
+            style="background: cadetblue;
+            line-height: 200%;
+            font-size: 20px;
+            margin-top: 50px;"
+            onclick="this.closest('my-widget-notify-component').doInstance()">fake Instance</button>
         </div>
       `;
     }
