@@ -90,7 +90,7 @@ router.post('/checkout-url', async (req, res) => {
     "channelType": "WEB"
   }, {
     headers:{
-        Authorization: authorization
+        Authorization: 'bBcy7Z6YOEKinxHcYqo7GWpIZWn2qw_O9bayHrxsaAs.eyJpbnN0YW5jZUlkIjoiNTY1YzU5YjUtMjU5Ny00YzBhLTg1MzUtNGM5MzdjNjZiOTRiIiwiYXBwRGVmSWQiOiIxMzgwYjcwMy1jZTgxLWZmMDUtZjExNS0zOTU3MWQ5NGRmY2QiLCJtZXRhU2l0ZUlkIjoiNWRlZTAxOWUtM2ZiZC00ZDc0LWJlZDQtMjRjNjRlOWIxM2UxIiwic2lnbkRhdGUiOiIyMDIxLTA4LTE5VDEyOjEzOjU1Ljg4M1oiLCJ2ZW5kb3JQcm9kdWN0SWQiOiJzdG9yZXNfZ29sZCIsImRlbW9Nb2RlIjpmYWxzZSwiYWlkIjoiNzExNDcwZmQtMzMzZS00NDM5LThkYjUtYzJiNTg5NDRkNjFmIiwiYmlUb2tlbiI6IjBiYjI1ODJiLTFhMmEtMDE3ZS0zYmUxLTY4NTUzMmZkYWFhYSIsInNpdGVPd25lcklkIjoiMzI5OTk4ZDYtMzc2Yi00NTZkLTlmODQtMGIwOWQ1MGNhMDYwIn0'
     }
   }).then(response => {
     console.log('response::', response);
