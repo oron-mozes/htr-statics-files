@@ -44,17 +44,18 @@ router.delete('/my-orders', async (req, res) => {
 
 router.post('/checkout-url', async (req, res) => {
   const {instanceId, visitorId, metaSiteId} = req.query;
-  console.log(1)
+ 
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
-  console.log(2)
+ 
   const roomsC = req.DBManager.db.collection(roomsCollection);
   for (const order of orders) {
     order.roomDetails = await roomsC.findOne({roomId: order.orderId});
   }
-  console.log(3)
+ 
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.findOne({instanceId});
+  console.log('installation:::', installation)
   const refreshResponse = await axios.post(refreshAccessUrl, {    
     "grant_type": "refresh_token",
     "client_id": appId,
