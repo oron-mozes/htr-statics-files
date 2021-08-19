@@ -101,7 +101,7 @@ router.post('/checkout-url', async (req, res) => {
   // })
   axios.get('https://www.wixapis.com/apps/v1/instance', {
     headers:{
-        Authorization: authorization
+        Authorization: access_token
     }
   }).then(response => {
     console.log('response::', response);
