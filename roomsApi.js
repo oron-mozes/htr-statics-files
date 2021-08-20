@@ -87,8 +87,8 @@ router.post('/checkout-url', async (req, res) => {
         Authorization: access_token
     }
   }).then(response => {
-    console.log('response::', response);
-    res.send({});
+    console.log('response::', response.data);
+    res.send(response.data);
   }).catch(e => {
     console.log(e);
     res.send({});
