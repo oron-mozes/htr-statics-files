@@ -44,7 +44,6 @@ router.delete('/my-orders', async (req, res) => {
 
 router.post('/checkout-url', async (req, res) => {
   const {instanceId, visitorId, metaSiteId} = req.body;
-  const {authorization,} = req.headers;
   const orderC = req.DBManager.db.collection(ordersCollection);
   const orders = await orderC.find({metaSiteId, visitorId}).toArray();
  
@@ -54,21 +53,19 @@ router.post('/checkout-url', async (req, res) => {
   }
  
   const instalactionC = req.DBManager.db.collection(installCollection);
-  const installation = await instalactionC.find({instanceId}).toArray();
-  console.log('installation:::', instanceId)
+  const installation = await instalactionC.findOne({instanceId})
   const refreshResponse = await axios.post(refreshAccessUrl, {    
     "grant_type": "refresh_token",
     "client_id": appId,
     "client_secret": appSecret,
-    "refresh_token": installation[0].refresh_token
+    "refresh_token": installation.refresh_token
 
   })
 
   const {access_token} = refreshResponse.data;
-  console.log({token: access_token})
+
   await instalactionC.updateOne({instanceId}, {$set: {access_token}});
   
-  console.log(5)
   const lineItems = orders.map(order => (
     {
       "id": order.orderId, 
@@ -81,16 +78,13 @@ router.post('/checkout-url', async (req, res) => {
       },
 
   }));
-  // https://wix.slack.com/archives/CRHHL21DG/p1626335562120700
+
   axios.post('https://www.wixapis.com/ecom/v1/checkouts', {
-    checkoutInfo:{
-      customFields:[{value: visitorId, title: 'visitorId'}]
-    },
     lineItems,
     "channelType": "WEB"
   }, {
     headers:{
-        Authorization: authorization
+        Authorization: access_token
     }
   }).then(response => {
     console.log('response::', response);
