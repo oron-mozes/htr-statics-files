@@ -21,7 +21,7 @@ router.post('/get-catalog-items', async (req, res) => {
   const roomsIds = Array.from(roomsMap.keys());
   console.log('::roomsIds::', roomsIds)
   const roomsC = req.DBManager.db.collection(roomsCollection);
-  const rooms = roomsC.find({ roomId: { $in: roomsIds } }).toArray();
+  const rooms = await roomsC.find({ roomId: { $in: roomsIds } }).toArray();
   console.log('::rooms::', rooms)
 
   const response = {
