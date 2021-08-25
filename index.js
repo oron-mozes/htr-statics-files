@@ -12,7 +12,7 @@ express()
   .use('/js', webComponentsApiApi)
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/install', installApi)
-  .use('/_api/catalog_spi', catalogSpi)
+  .use('/catalog_spi', catalogSpi)
   .use('/_api/rooms', roomsApi)
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

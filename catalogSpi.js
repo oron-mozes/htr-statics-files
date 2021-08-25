@@ -10,7 +10,7 @@ router.use(express.urlencoded());
 router.use(dbConnection);
 
 
-router.get('/', async (req, res) => {
+router.get('/get-catalog-items', async (req, res) => {
   const { currency, instanceId, catalogReferences } = req.body;
 
   const roomsMap = new Map([]);
