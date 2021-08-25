@@ -100,7 +100,7 @@ function load() {
             "channelType": "WEB"
           })})
         .then(data => data.json()).then((res) => {
-          fetch(`/ecom/v1/checkouts/${resid}/wix-checkout-url`, 
+          fetch(`/ecom/v1/checkouts/${res.checkout.id}/wix-checkout-url`, 
           {
             method:'get',
             headers: {
