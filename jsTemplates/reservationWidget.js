@@ -15,8 +15,8 @@ function addInstance() {
 }
 
 function getCheckoutUrl (id) {
-  const query= {"a11y":encodeURIComponent(true),"storeUrl":encodeURIComponent(window.location.origin),"isFastFlow":encodeURIComponent(false),"isPickupFlow":encodeURIComponent(false),"cashierPaymentId":encodeURIComponent(""),"origin":("productPage"),"originType":encodeURIComponent("buyNow"),"checkoutId":encodeURIComponent(id)}
-  return `/checkout?appSectionParams=${JSON.stringify(query)}`
+  const query= JSON.stringify(encodeURIComponent({"a11y":true,"storeUrl":window.location.origin,"isFastFlow":false,"isPickupFlow":false,"cashierPaymentId":"","origin":"productPage","originType":"buyNow","checkoutId":id}))
+  return `/checkout?appSectionParams=${query}`
 }
 
 function load() {
