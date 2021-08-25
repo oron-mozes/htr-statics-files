@@ -15,7 +15,7 @@ function addInstance() {
 }
 
 function getCheckoutUrl (id) {
-  const query= encodeURIComponent({"a11y":true,"storeUrl":window.location.pathname,"isFastFlow":false,"isPickupFlow":false,"cashierPaymentId":"","origin":"productPage","originType":"buyNow","checkoutId":id})
+  const query= {"a11y":true,"storeUrl":encodeURIComponent(window.location.origin),"isFastFlow":false,"isPickupFlow":false,"cashierPaymentId":"","origin":"productPage","originType":"buyNow","checkoutId":id}
   return `/checkout?appSectionParams=${query}`
 }
 
