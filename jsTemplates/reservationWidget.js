@@ -17,7 +17,7 @@ function addInstance() {
 function getCheckoutUrl (id) {
   
   var uri = `{"a11y":true,"storeUrl":${window.location.origin},"isFastFlow":false,"isPickupFlow":false,"cashierPaymentId":"","origin":"productPage","originType":"buyNow","checkoutId":${id}}`;
-  var res = encodeURIComponent(JSON.stringify(uri));
+  var res = JSON.stringify(encodeURIComponent(uri));
   
   return `/checkout?appSectionParams=${res}`
 }
