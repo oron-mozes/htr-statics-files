@@ -14,9 +14,15 @@ function addInstance() {
   return `instanceId=${userInstance}`;
 }
 
+function getCheckoutUrl (id) {
+  const query= encodeURIComponent({"a11y":true,"storeUrl":window.location.pathname,"isFastFlow":false,"isPickupFlow":false,"cashierPaymentId":"","origin":"productPage","originType":"buyNow","checkoutId":id})
+  return `/checkout?appSectionParams=${query}`
+}
+
 function load() {
   const baseUrl = 'https://htr-staticfiles.herokuapp.com/_api/rooms'
 
+  
   class MyWidgetThatSendsData extends __wixWebComponentRender__.WixHTMLElement {
     constructor() {
       super({orders: []});
@@ -100,19 +106,9 @@ function load() {
             "channelType": "WEB"
           })})
         .then(data => data.json()).then((res) => {
-          fetch(`/ecom/v1/checkouts/${res.checkout.id}/wix-checkout-url`, 
-          {
-            method:'get',
-            headers: {
-              'Content-Type': 'application/json',
-              authorization: window.wixEmbedsAPI.getAppToken('7cbc47b3-cfc6-4d20-a13d-40cd1521378b')
-            },
-           })
-          .then(data => data.json()).then((res) => {
-            console.log('resr::::', res)
-            window.open(res.relativePath, '_blank')
-          }).catch(e => console.error(e))
           
+            window.open(getCheckoutUrl(res.checkout.id), '_blank')
+         
         }).catch(e => console.error(e))
       // wixDevelopersAnalytics.triggerEvent('htrMessage', {data: {say: `The time is ${new Date().toTimeString()}`}})
     }
