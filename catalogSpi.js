@@ -21,7 +21,8 @@ router.post('/get-catalog-items', async (req, res) => {
   const roomsIds = Array.from(roomsMap.keys());
   const roomsC = req.DBManager.db.collection(roomsCollection);
   const rooms = await roomsC.find({ roomId: { $in: roomsIds } }).toArray();
-
+//https://bo.wix.com/wix-docs/rest/drafts/catalog-spi/get-catalog-items
+//https://github.com/wix-private/ecom/blob/dc2239a7893aac54e65e24951e7551d08bf2688e/server/wix-ecommerce-server/wix-ecommerce-catalog-spi/src/main/proto/com/wix/ecommerce/catalog_spi/api/v1/description_line.proto
   const response = {
     catalogItems: rooms.map((room) => ({
       catalogReference: {

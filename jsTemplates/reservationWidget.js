@@ -99,8 +99,8 @@ function load() {
             lineItems,
             "channelType": "WEB"
           })})
-        .then(data => data.json()).then((ordersData) => {
-          console.log(':::ordersData::', ordersData)
+        .then(data => data.json()).then((res) => {
+          window.open(`/ecom/v1/checkouts/${res.checkout.id}/wix-checkout-url`, '_blank')
         }).catch(e => console.error(e))
       // wixDevelopersAnalytics.triggerEvent('htrMessage', {data: {say: `The time is ${new Date().toTimeString()}`}})
     }
