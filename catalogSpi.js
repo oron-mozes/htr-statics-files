@@ -19,6 +19,7 @@ router.post('/get-catalog-items', async (req, res) => {
   );
 
   const roomsIds = Array.from(roomsMap.keys());
+  console.log('roomsIds::', roomsIds)
   const roomsC = req.DBManager.db.collection(roomsCollection);
   const rooms = await roomsC.find({ roomId: { $in: roomsIds } }).toArray();
 //https://bo.wix.com/wix-docs/rest/drafts/catalog-spi/get-catalog-items
