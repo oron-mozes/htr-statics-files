@@ -100,7 +100,19 @@ function load() {
             "channelType": "WEB"
           })})
         .then(data => data.json()).then((res) => {
-          window.open(`/ecom/v1/checkouts/${res.checkout.id}/wix-checkout-url`, '_blank')
+          fetch(`/ecom/v1/checkouts/${resid}/wix-checkout-url`, 
+          {
+            method:'get',
+            headers: {
+              'Content-Type': 'application/json',
+              authorization
+            },
+           })
+          .then(data => data.json()).then((res) => {
+            console.log('resr::::', res)
+            window.open(res.relativePath, '_blank')
+          }).catch(e => console.error(e))
+          
         }).catch(e => console.error(e))
       // wixDevelopersAnalytics.triggerEvent('htrMessage', {data: {say: `The time is ${new Date().toTimeString()}`}})
     }
