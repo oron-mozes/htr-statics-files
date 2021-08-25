@@ -15,7 +15,8 @@ function addInstance() {
 }
 
 function getCheckoutUrl (id) {
-  const query= JSON.stringify(encodeURIComponent({"a11y":true,"storeUrl":window.location.origin,"isFastFlow":false,"isPickupFlow":false,"cashierPaymentId":"","origin":"productPage","originType":"buyNow","checkoutId":id}))
+  // const query= JSON.stringify(encodeURIComponent({"a11y":true,"storeUrl":window.location.origin,"isFastFlow":false,"isPickupFlow":false,"cashierPaymentId":"","origin":"productPage","originType":"buyNow","checkoutId":id}))
+  const query = `%7B%22a11y%22%3Atrue%2C%22storeUrl%22%3A${window.location.origin}%2C%22isFastFlow%22%3Afalse%2C%22isPickupFlow%22%3Afalse%2C%22cashierPaymentId%22%3A%22%22%2C%22origin%22%3A%22productPage%22%2C%22originType%22%3A%22buyNow%22%2C%22checkoutId%22%3A${id}%7D`
   return `/checkout?appSectionParams=${query}`
 }
 
