@@ -19,10 +19,8 @@ router.post('/get-catalog-items', async (req, res) => {
   );
 
   const roomsIds = Array.from(roomsMap.keys());
-  console.log('::roomsIds::', roomsIds)
   const roomsC = req.DBManager.db.collection(roomsCollection);
   const rooms = await roomsC.find({ roomId: { $in: roomsIds } }).toArray();
-  console.log('::rooms::', rooms)
 
   const response = {
     catalogItems: rooms.map((room) => ({
@@ -33,7 +31,7 @@ router.post('/get-catalog-items', async (req, res) => {
       data: {
         productName: {
           original: room.name,
-          translated: '',
+          translated: room.name,
         },
         url: {
           relativePath: '/product-page/a-product',
@@ -59,7 +57,7 @@ router.post('/get-catalog-items', async (req, res) => {
         itemType: {
           preset: 'DIGITAL',
         },
-        fulfillerId: 'ID of the fulfiller for this item.',
+        fulfillerId: room.roomId,
       },
     })),
   };
