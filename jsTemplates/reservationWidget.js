@@ -70,7 +70,40 @@ function load() {
       }
       
     }
-
+    doCheckout2 = () => {
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      const authorization = wixconfig.authorization;
+      const lineItems = this.state.orders.map(order => (
+        {
+          "id": order.orderId, 
+          "quantity": order.quantity, 
+          "description" : order.roomDetails.description, 
+          "catalogReference":
+          {
+            appId:'7cbc47b3-cfc6-4d20-a13d-40cd1521378b', 
+            "catalogItemId": order.orderId
+          },
+    
+      }));
+      // fetch(`${baseUrl}/create-checkouts`,
+      fetch('/ecom/v1/checkouts', 
+        {
+          method:'post',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization
+          },
+          body:JSON.stringify({
+            // metaSiteId: this.state.metaSiteId,
+            // visitorId:this.state.visitorId
+            lineItems,
+            "channelType": "WEB"
+          })})
+        .then(data => data.json()).then((ordersData) => {
+          console.log(':::ordersData::', ordersData)
+        }).catch(e => console.error(e))
+      // wixDevelopersAnalytics.triggerEvent('htrMessage', {data: {say: `The time is ${new Date().toTimeString()}`}})
+    }
     doCheckout = () => {
       
       const authorization = window.wixEmbedsAPI.getAppToken('7cbc47b3-cfc6-4d20-a13d-40cd1521378b');
@@ -156,7 +189,7 @@ function load() {
             line-height: 200%;
             font-size: 20px;
             margin-top: 50px;"
-            onclick="this.closest('my-widget-notify-component').doCheckout()">Complete Order</button>
+            onclick="this.closest('my-widget-notify-component').doCheckout2()">Complete Order</button>
             <button 
             style="background: cadetblue;
             line-height: 200%;
