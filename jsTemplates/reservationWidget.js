@@ -105,7 +105,7 @@ function load() {
             method:'get',
             headers: {
               'Content-Type': 'application/json',
-              authorization
+              authorization: window.wixEmbedsAPI.getAppToken('7cbc47b3-cfc6-4d20-a13d-40cd1521378b')
             },
            })
           .then(data => data.json()).then((res) => {
