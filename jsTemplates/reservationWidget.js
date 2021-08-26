@@ -105,6 +105,7 @@ function load() {
           body:JSON.stringify({
             // metaSiteId: this.state.metaSiteId,
             // visitorId:this.state.visitorId
+            isSync:true,
             lineItems,
             "channelType": "WEB"
           })})
