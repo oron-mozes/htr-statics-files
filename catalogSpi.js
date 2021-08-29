@@ -50,6 +50,10 @@ router.post('/get-catalog-items', async (req, res) => {
             plainTextValue: {
               original: room.description,
               translated: room.description,
+            },
+            plainText: {
+              original: room.description,
+              translated: room.description,
             }
           },
         ],
