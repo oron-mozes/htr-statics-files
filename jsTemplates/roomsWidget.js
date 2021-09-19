@@ -31,7 +31,7 @@ function load() {
     }
    
     connectedCallback() {
-      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      // this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
       // const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       // this.updateState(wixconfig);
       // const data = JSON.parse(unescape(this.getAttribute('data')));
@@ -82,7 +82,7 @@ function load() {
     }
   
     connectedCallback() {
-      // this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
       // const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       // this.updateState(wixconfig);
       // const data = JSON.parse(unescape(this.getAttribute('data')));
