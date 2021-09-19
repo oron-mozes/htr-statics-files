@@ -53,7 +53,7 @@ function load() {
     }
 
     log = () => {
-      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      this.dispatchEvent(new CustomEvent('navigateTo', {detail:{page: 'my-page-component?test=123'}}));
     }
     render() {
       const {rooms} = this.state;
