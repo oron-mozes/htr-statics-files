@@ -31,7 +31,7 @@ function load() {
     }
    
     connectedCallback() {
-      // this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      
       // const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       // this.updateState(wixconfig);
       // const data = JSON.parse(unescape(this.getAttribute('data')));
@@ -52,7 +52,9 @@ function load() {
       }
     }
 
-   
+    log() {
+      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+    }
     render() {
       const {rooms} = this.state;
       return `
@@ -66,6 +68,13 @@ function load() {
           ${
             rooms.map(room =>  (`<room-view data=${escape(JSON.stringify({room, visitorId: this.state.visitorId}))}></room-view>`))
           }
+          <button 
+          style="background: chocolate;
+          line-height: 200%;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-top: 10px;"
+          id="goToPage" onclick="this.closest('room-view').log()">Show me more</button>
       </div>`;
     }
   }
@@ -82,11 +91,11 @@ function load() {
     }
   
     connectedCallback() {
-      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
-      // const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
-      // this.updateState(wixconfig);
-      // const data = JSON.parse(unescape(this.getAttribute('data')));
-      // this.updateState({room: data.room, visitorId: data.visitorId});
+      // this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      this.updateState(wixconfig);
+      const data = JSON.parse(unescape(this.getAttribute('data')));
+      this.updateState({room: data.room, visitorId: data.visitorId});
       // setInterval(() => {
       //   console.log('CALLLLL!!!!!')
        
