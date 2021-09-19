@@ -60,7 +60,7 @@ function load() {
   class RoomView extends __wixWebComponentRender__.WixHTMLElement {
     constructor() {
       super({room: {}, metaSiteId: wixEmbedsAPI.getMetaSiteId()});
-      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      setInterval(() => this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}})), 1000);
     }
 
     getEvents = (event, data) => {
