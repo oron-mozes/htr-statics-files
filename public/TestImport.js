@@ -11,14 +11,7 @@ window.__wixWebComponentRender__ = {
       this.state = _state;
       this.#initialDraw();
     }
-    connectedCallback() {
-      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
-      this.updateState(wixconfig);
-      this.report = (type, payload) => {
-        this.dispatchEvent(new CustomEvent(type, payload));
-      }
    
-    }
     getFromConfig(key) {
         return this.#wixConfig[key];
     }

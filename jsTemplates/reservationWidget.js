@@ -35,6 +35,7 @@ function load() {
       }
     }
     connectedCallback() {
+      
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       this.updateState(wixconfig)
     }
@@ -230,6 +231,8 @@ function load() {
     }
 
     connectedCallback() { 
+      const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      this.updateState(wixconfig);
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState(data)
     }

@@ -4,11 +4,7 @@ class MyWebCompAsPage extends HTMLElement {
     super();
   }
   connectedCallback() {
-    setTimeout(() => {
-      console.log("before event");
-      this.dispatchEvent(new CustomEvent('web-component-event'));
-      console.log("after event");
-    }, 500)
+
     this.dispatchEvent(new CustomEvent('web-component-event'));
     const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
     // current instanceId
