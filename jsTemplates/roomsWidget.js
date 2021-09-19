@@ -75,7 +75,7 @@ function load() {
       this.updateState({room: data.room, visitorId: data.visitorId});
       setInterval(() => {
         console.log('CALLLLL!!!!!')
-        this.report('web-component-event', {detail:{page: 'my-page-component'}});
+        this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
       }, 1000);
     }
   
