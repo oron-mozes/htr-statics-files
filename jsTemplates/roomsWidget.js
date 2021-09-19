@@ -71,7 +71,7 @@ function load() {
     }
   
     connectedCallback() {
-      this.dispatchEvent(new CustomEvent('navigateTo', {detail:{page: 'my-page-component'}}));
+      this.dispatchEvent(new CustomEvent('navigateTo'));
 
       // const data = JSON.parse(unescape(this.getAttribute('data')))
       // this.updateState({room: data.room, visitorId: data.visitorId});
