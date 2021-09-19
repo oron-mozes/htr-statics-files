@@ -63,7 +63,7 @@ function load() {
       super({room: {}, metaSiteId: wixEmbedsAPI.getMetaSiteId()});
       setInterval(() => {
         console.log('CALLLLL!!!!!')
-        this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+        this.report('web-component-event', {detail:{page: 'my-page-component'}});
       }, 1000);
     }
 

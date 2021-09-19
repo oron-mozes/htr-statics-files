@@ -17,10 +17,7 @@ window.__wixWebComponentRender__ = {
       this.report = (type, payload) => {
         this.dispatchEvent(new CustomEvent(type, payload));
       }
-      setInterval(() => {
-        console.log('CALLLLL!!!!!1111111')
-        this.report('web-component-event', {detail:{page: 'my-page-component11111'}});
-      }, 2000);
+   
     }
     getFromConfig(key) {
         return this.#wixConfig[key];
