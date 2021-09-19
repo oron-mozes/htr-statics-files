@@ -14,6 +14,10 @@ window.__wixWebComponentRender__ = {
     connectedCallback() {
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       this.updateState(wixconfig)
+      setInterval(() => {
+        console.log('CALLLLL!!!!!1111111')
+        this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component11111'}}));
+      }, 2000);
     }
     getFromConfig(key) {
         return this.#wixConfig[key];
