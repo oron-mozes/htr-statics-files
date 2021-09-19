@@ -71,7 +71,7 @@ function load() {
     }
   
     connectedCallback() {
-      this.dispatchEvent(new CustomEvent('navigateTo'));
+      this.dispatchEvent(new CustomEvent('web-component-event'));
 
       // const data = JSON.parse(unescape(this.getAttribute('data')))
       // this.updateState({room: data.room, visitorId: data.visitorId});
