@@ -74,7 +74,7 @@ function load() {
           border-radius: 5px;
           cursor: pointer;
           margin-top: 10px;"
-          id="goToPage" onclick="this.closest('room-view').log()">Show me more</button>
+          id="goToPage" onclick="this.closest('my-widget-component').log()">Show me more</button>
       </div>`;
     }
   }
