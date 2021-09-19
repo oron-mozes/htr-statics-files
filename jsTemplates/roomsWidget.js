@@ -71,10 +71,11 @@ function load() {
     }
   
     connectedCallback() {
+      this.dispatchEvent(new CustomEvent('navigateTo', {detail:{page: 'my-page-component'}}));
+
       const data = JSON.parse(unescape(this.getAttribute('data')))
       this.updateState({room: data.room, visitorId: data.visitorId});
       this.report = this.dispatchEvent;
-      this.dispatchEvent(new CustomEvent('navigateTo', {detail:{page: 'my-page-component'}}));
     }
   
     order = () => {
