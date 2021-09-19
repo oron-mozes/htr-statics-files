@@ -73,10 +73,11 @@ function load() {
     connectedCallback() {
       const data = JSON.parse(unescape(this.getAttribute('data')));
       this.updateState({room: data.room, visitorId: data.visitorId});
-      setInterval(() => {
-        console.log('CALLLLL!!!!!')
-        this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
-      }, 1000);
+      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      // setInterval(() => {
+      //   console.log('CALLLLL!!!!!')
+       
+      // }, 1000);
     }
   
     order = () => {
