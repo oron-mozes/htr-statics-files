@@ -61,10 +61,6 @@ function load() {
   class RoomView extends __wixWebComponentRender__.WixHTMLElement {
     constructor() {
       super({room: {}, metaSiteId: wixEmbedsAPI.getMetaSiteId()});
-      setInterval(() => {
-        console.log('CALLLLL!!!!!')
-        this.report('web-component-event', {detail:{page: 'my-page-component'}});
-      }, 1000);
     }
 
     getEvents = (event, data) => {
@@ -75,7 +71,10 @@ function load() {
   
     connectedCallback() {
       const data = JSON.parse(unescape(this.getAttribute('data')))
-      this.updateState({room: data.room, visitorId: data.visitorId})
+      this.updateState({room: data.room, visitorId: data.visitorId});
+      this.report = (type, payload) => {
+        this.dispatchEvent(new CustomEvent(type, payload));
+      }
     }
   
     order = () => {
@@ -97,7 +96,7 @@ function load() {
 
     log() {
       console.log('CLICKED!!!!');
-      this.dispatchEvent(new CustomEvent('navigateTo', {detail:{page: 'my-page-component'}}));
+      this.report('navigateTo', {detail:{page: 'my-page-component'}});
     }
     
     render() {
