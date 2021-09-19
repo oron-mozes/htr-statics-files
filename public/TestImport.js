@@ -4,7 +4,7 @@ window.__wixWebComponentRender__ = {
   WixHTMLElement: class extends HTMLElement {
     state = {};
     #wixConfig;
-
+    report;
     constructor(_state = {}) {
       super();
       this.setAttribute('style', 'display:block')
@@ -13,10 +13,13 @@ window.__wixWebComponentRender__ = {
     }
     connectedCallback() {
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
-      this.updateState(wixconfig)
+      this.updateState(wixconfig);
+      this.report = (type, payload) => {
+        this.dispatchEvent(new CustomEvent(type, payload));
+      }
       setInterval(() => {
         console.log('CALLLLL!!!!!1111111')
-        this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component11111'}}));
+        this.report('web-component-event', {detail:{page: 'my-page-component11111'}});
       }, 2000);
     }
     getFromConfig(key) {
