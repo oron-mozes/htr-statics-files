@@ -24,6 +24,10 @@ function load() {
       } else {
         window.wixDevelopersAnalytics.register('my-widget-component', this.getEvents)
       }
+      setInterval(() => {
+        console.log('CALLLLL!!!!!1111111')
+        this.dispatchEvent(new CustomEvent('web-component-event11111', {detail:{page: 'my-page-component'}}));
+      }, 2000);
       fetch(`${baseUrl}?${addInstance()}`).then(response => response.json()).then(roomsData => {
         this.updateState(roomsData)
       })
