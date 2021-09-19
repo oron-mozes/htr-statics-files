@@ -14,12 +14,11 @@ function addInstance() {
   return `instanceId=${userInstance}`;
 }
 
-function getCheckoutUrl (id) {
+function getCheckoutUrl (checkoutId) {
+  var uri = {a11y:true,storeUrl:window.location.origin,isFastFlow:false,isPickupFlow:false,cashierPaymentId:"",origin:"productPage",originType:"buyNow",checkoutId};
+  var query = encodeURIComponent(JSON.stringify(uri));
   
-  var uri = {a11y:true,storeUrl:window.location.origin,isFastFlow:false,isPickupFlow:false,cashierPaymentId:"",origin:"productPage",originType:"buyNow",checkoutId:id};
-  var res = encodeURIComponent(JSON.stringify(uri));
-  
-  return `/checkout?appSectionParams=${res}`
+  return `/checkout?appSectionParams=${query}`
 }
 
 function load() {
@@ -84,7 +83,6 @@ function load() {
       const authorization = window.wixEmbedsAPI.getAppToken('7cbc47b3-cfc6-4d20-a13d-40cd1521378b');
       const lineItems = this.state.orders.map(order => (
         {
-          // "id": order.orderId, 
           "quantity": order.quantity, 
           "description" : order.roomDetails.description, 
           "catalogReference":
@@ -103,14 +101,21 @@ function load() {
             authorization
           },
           body:JSON.stringify({
-            // metaSiteId: this.state.metaSiteId,
-            // visitorId:this.state.visitorId
-            checkoutInfo:{isSync:true},
-            lineItems,
+            lineItems:orders.map(order => (
+              {
+                "quantity": order.quantity, 
+                "description" : order.roomDetails.description, 
+                "catalogReference":
+                {
+                  appId:'7cbc47b3-cfc6-4d20-a13d-40cd1521378b', 
+                  "catalogItemId": order.orderId
+                },
+          
+            })),
             "channelType": "WEB"
           })})
         .then(data => data.json()).then((res) => {
-          
+          //res.checkout.id
             window.open(getCheckoutUrl(res.checkout.id), '_blank')
          
         }).catch(e => console.error(e))
