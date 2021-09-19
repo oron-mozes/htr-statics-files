@@ -71,9 +71,10 @@ function load() {
     }
   
     connectedCallback() {
+      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+
       const data = JSON.parse(unescape(this.getAttribute('data')));
       this.updateState({room: data.room, visitorId: data.visitorId});
-      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
       // setInterval(() => {
       //   console.log('CALLLLL!!!!!')
        
