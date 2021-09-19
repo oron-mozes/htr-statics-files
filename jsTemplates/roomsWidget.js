@@ -119,7 +119,7 @@ function load() {
       }).catch(e => console.error(e))
     }
 
-    log() {
+    log = () => {
       console.log('CLICKED!!!!');
       this.dispatchEvent(new CustomEvent('navigateTo', {detail:{page: 'my-page-component'}}));
     }
