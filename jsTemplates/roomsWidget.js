@@ -52,7 +52,7 @@ function load() {
       }
     }
 
-    log() {
+    log = () => {
       this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
     }
     render() {
