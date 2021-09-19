@@ -30,6 +30,17 @@ function load() {
       })
     }
    
+    connectedCallback() {
+      this.dispatchEvent(new CustomEvent('web-component-event', {detail:{page: 'my-page-component'}}));
+      // const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
+      // this.updateState(wixconfig);
+      // const data = JSON.parse(unescape(this.getAttribute('data')));
+      // this.updateState({room: data.room, visitorId: data.visitorId});
+      // setInterval(() => {
+      //   console.log('CALLLLL!!!!!')
+       
+      // }, 1000);
+    }
     
     getEvents = (event, data) => {
 
