@@ -102,17 +102,7 @@ function load() {
             authorization
           },
           body:JSON.stringify({
-            lineItems:orders.map(order => (
-              {
-                "quantity": order.quantity, 
-                "description" : order.roomDetails.description, 
-                "catalogReference":
-                {
-                  appId:'7cbc47b3-cfc6-4d20-a13d-40cd1521378b', 
-                  "catalogItemId": order.orderId
-                },
-          
-            })),
+            lineItems,
             "channelType": "WEB"
           })})
         .then(data => data.json()).then((res) => {
