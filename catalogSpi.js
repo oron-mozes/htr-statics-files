@@ -67,7 +67,7 @@ router.post('/get-catalog-items', async (req, res) => {
         },
         quantityAvailable: roomsMap.get(room.roomId),
         itemType: {
-          preset: 'DIGITAL',
+          preset: 'PHYSICAL',
         },
         fulfillerId: room.roomId,
       },
