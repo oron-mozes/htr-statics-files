@@ -10,7 +10,7 @@ const webComponentsApiApi = require('./webComponentsApi.js');
 express()
   .use(cors())
   .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'html')
+  .set('view engine', 'ejs')
   .use('/js', webComponentsApiApi)
   .use(express.static(path.join(__dirname, 'public')))
   .use('/_api/install', installApi)
