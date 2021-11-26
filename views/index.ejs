@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <head>
-  <script src="widget.bundle.js"></script>
+  <!-- <script src="widget.bundle.js"></script> -->
 </head>
 <body>
   <div>1</div>
-  <!-- <script>
-    new Worker('');
-  </script> -->
+  <script>
+    const worker = new Worker('widget.bundle.js');
+    console.log({worker})
+  </script>
   <accessibility-widget wixconfig='{"data":{"borderColor":{"color":"rgba(17,17,17,1)"},"buttonTextColor":{"color":"rgba(17,17,20,1)"},"buttonBackground":{"color":"rgba(17,17,17,1)"}}}'/>
 </body>
 </html>
