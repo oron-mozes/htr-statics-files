@@ -93,6 +93,16 @@ function load() {
                 "lastName": "User",
                 "phone": "+9720500000000",
                 "company": "TestToday",
+              },
+              "address": {
+                "country": "IL",
+                "city": "Test",
+                "postalCode": "1234567",
+                "streetAddress": {
+                  "number": "2",
+                  "name": "nice ally",
+                },
+                "addressLine": "nice ally 2 apt 2"
               }
             },
             "buyerInfo": {
