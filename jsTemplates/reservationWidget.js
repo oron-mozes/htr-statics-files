@@ -115,10 +115,6 @@ function load() {
                   "country": "IL",
                   "city": "Rehovot",
                   "postalCode": "7638771",
-                  "streetAddress": {
-                    "number": "5",
-                    "name": "yaccove tamri 5",
-                  },
                   "addressLine": "yaccove tamri 5/13"
                 }
               },
