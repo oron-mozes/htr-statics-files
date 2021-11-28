@@ -107,7 +107,7 @@ function load() {
             },
             "buyerInfo": {
               "email": "oronm@wix.com",
-              "visitorId": wixconfig.data.visitorId
+              "openAccess": true
             }
           },
           "catalogReference":
