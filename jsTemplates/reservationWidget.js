@@ -96,13 +96,13 @@ function load() {
               },
               "address": {
                 "country": "IL",
-                "city": "Test",
-                "postalCode": "1234567",
+                "city": "Rehovot",
+                "postalCode": "7638771",
                 "streetAddress": {
-                  "number": "2",
-                  "name": "nice ally",
+                  "number": "5",
+                  "name": "yaccove tamri 5",
                 },
-                "addressLine": "nice ally 2 apt 2"
+                "addressLine": "yaccove tamri 5/13"
               }
             },
             "buyerInfo": {
