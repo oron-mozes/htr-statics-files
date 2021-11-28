@@ -115,7 +115,10 @@ function load() {
                   "country": "IL",
                   "city": "Rehovot",
                   "postalCode": "7638771",
-                  "addressLine": "yaccove tamri 5/13"
+                  "streetAddress": {
+                    "number": "5",
+                    "name": "yaccove tamri",
+                  }
                 }
               },
               "buyerInfo": {
