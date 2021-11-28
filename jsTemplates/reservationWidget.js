@@ -86,30 +86,6 @@ function load() {
         {
           "quantity": order.quantity, 
           "description" : order.roomDetails.description, 
-          "checkoutInfo": {
-            "billingInfo": {
-              "contactDetails": {
-                "firstName": "Test",
-                "lastName": "User",
-                "phone": "+9720504643003",
-                "company": "TestToday",
-              },
-              "address": {
-                "country": "IL",
-                "city": "Rehovot",
-                "postalCode": "7638771",
-                "streetAddress": {
-                  "number": "5",
-                  "name": "yaccove tamri 5",
-                },
-                "addressLine": "yaccove tamri 5/13"
-              }
-            },
-            "buyerInfo": {
-              "email": "oronm@wix.com",
-              "openAccess": true
-            }
-          },
           "catalogReference":
           {
             appId:'7cbc47b3-cfc6-4d20-a13d-40cd1521378b', 
@@ -127,6 +103,30 @@ function load() {
           },
           body:JSON.stringify({
             lineItems,
+            "checkoutInfo": {
+              "billingInfo": {
+                "contactDetails": {
+                  "firstName": "Test",
+                  "lastName": "User",
+                  "phone": "+9720504643003",
+                  "company": "TestToday",
+                },
+                "address": {
+                  "country": "IL",
+                  "city": "Rehovot",
+                  "postalCode": "7638771",
+                  "streetAddress": {
+                    "number": "5",
+                    "name": "yaccove tamri 5",
+                  },
+                  "addressLine": "yaccove tamri 5/13"
+                }
+              },
+              "buyerInfo": {
+                "email": "oronm@wix.com",
+                "openAccess": true
+              }
+            },
             "channelType": "WEB"
           })})
         .then(data => data.json()).then((res) => {
