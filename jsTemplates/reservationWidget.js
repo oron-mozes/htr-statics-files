@@ -86,6 +86,20 @@ function load() {
         {
           "quantity": order.quantity, 
           "description" : order.roomDetails.description, 
+          "checkoutInfo": {
+            "billingInfo": {
+              "contactDetails": {
+                "firstName": "Test",
+                "lastName": "User",
+                "phone": "+9720500000000",
+                "company": "TestToday",
+              }
+            },
+            "buyerInfo": {
+              "email": "oronm@wix.com",
+              "openAccess": true
+            }
+          },
           "catalogReference":
           {
             appId:'7cbc47b3-cfc6-4d20-a13d-40cd1521378b', 
