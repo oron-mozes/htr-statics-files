@@ -103,7 +103,7 @@ function load() {
 
     doCheckout3 = () => {
       fetch(
-        'https://manage.wix.com/_api/app-makret-payment-service-server/v1/order',
+        '/app-makret-payment-service-server/v1/order',
         {
           method: 'post',
           headers: {
