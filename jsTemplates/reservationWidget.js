@@ -113,7 +113,7 @@ function load() {
             ),
           },
           body: JSON.stringify({
-            accountId:`7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${instanceId}`,
+            accountId:`7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
             amount: '100',
             currency: 'EUR',
             appOrderId: '123-123-123',
