@@ -283,7 +283,7 @@ function load() {
             line-height: 200%;
             font-size: 20px;
             margin-top: 50px;"
-            onclick="this.closest('my-widget-notify-component').doCheckout2()">Complete Order: Test</button>
+            onclick="this.closest('my-widget-notify-component').doCheckout3()">Complete Order: Test</button>
             <button 
             style="background: cadetblue;
             line-height: 200%;
