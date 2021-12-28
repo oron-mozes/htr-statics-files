@@ -109,18 +109,39 @@ router.post('/test-instance', async (req, res) => {
   })
 
   const {access_token} = refreshResponse.data;
-  await instalactionC.updateOne({instanceId}, {$set: {access_token}});
-  
-  axios.get('https://www.wixapis.com/apps/v1/instance', {
-    headers:{
-        Authorization: access_token
-    }
-  }).then(response => {
-    res.json(response.data);
-  }).catch(e => {
-    console.log(e);
-    res.send({e});
+  return axios.post('/app-makret-payment-service-server/v1/order',
+  {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: access_token
+    },
+    body: JSON.stringify({
+      accountId:`7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
+      amount: '100',
+      currency: 'EUR',
+      appOrderId: '123-123-123',
+      item: {
+        name: 'test order',
+        description: 'this is my test item',
+        id: '123456',
+        quantity: 1,
+        price: 100
+      }
+    }),
   })
+  // await instalactionC.updateOne({instanceId}, {$set: {access_token}});
+  
+  // axios.get('https://www.wixapis.com/apps/v1/instance', {
+  //   headers:{
+  //       Authorization: access_token
+  //   }
+  // }).then(response => {
+  //   res.json(response.data);
+  // }).catch(e => {
+  //   console.log(e);
+  //   res.send({e});
+  // })
 });
 router.post('/fake-collection', async (req, res) => {
   const {instanceId} = req.body;
