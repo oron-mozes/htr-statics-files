@@ -103,7 +103,7 @@ function load() {
 
     doCheckout3 = () => {
       fetch(
-        '/app-makret-payment-service-server/v1/order',
+        '/app-market-payment-service-server/v1/order',
         {
           method: 'post',
           headers: {
