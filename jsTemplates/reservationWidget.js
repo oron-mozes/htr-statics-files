@@ -123,7 +123,7 @@ function load() {
             amount: items[0].price,
             currency: 'EUR',
             appOrderId: '123-123-123',
-            item: items[0]
+            item: items[0],
           }),
         })
           .then((data) => data.json())
@@ -136,7 +136,7 @@ function load() {
         item.price = items.reduce((a, n) => {
           a = a + Number(n.price);
           return a;
-        }, 0)
+        }, 0);
         fetch('/app-market-payment-service-server/v1/item/update', {
           method: 'post',
           headers: {
@@ -146,11 +146,9 @@ function load() {
             ),
           },
           body: JSON.stringify({
-            accountId: `7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
-            amount: item.price,
-            currency: 'EUR',
+            orderId: window.orderIdCreated,
             appOrderId: '123-123-123',
-            item: item
+            item: item,
           }),
         })
           .then((data) => data.json())
