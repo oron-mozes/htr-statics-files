@@ -107,7 +107,7 @@ function load() {
         description: order.roomDetails.description,
         id: order.orderId,
         quantity: order.quantity,
-        price: order.roomDetails.price,
+        price: Number(order.roomDetails.price),
       }));
       if (!window.orderIdCreated) {
         fetch('/app-market-payment-service-server/v1/order', {
@@ -120,7 +120,7 @@ function load() {
           },
           body: JSON.stringify({
             accountId: `7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
-            amount: items[0].price,
+            amount: items[0].price.toString(),
             currency: 'EUR',
             appOrderId: '123-123-123',
             item: items[0],
