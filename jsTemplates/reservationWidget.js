@@ -102,9 +102,15 @@ function load() {
     };
 
     doCheckout3 = () => {
-      fetch(
-        '/app-market-payment-service-server/v1/order',
-        {
+      const items = this.state.orders.map((order) => ({
+        name: order.roomDetails.name,
+        description: order.roomDetails.description,
+        id: order.orderId,
+        quantity: order.quantity,
+        price: order.roomDetails.price,
+      }));
+      if (!window.orderIdCreated) {
+        fetch('/app-market-payment-service-server/v1/order', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
@@ -113,25 +119,46 @@ function load() {
             ),
           },
           body: JSON.stringify({
-            accountId:`7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
-            amount: '100',
+            accountId: `7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
+            amount: items[0].price,
             currency: 'EUR',
             appOrderId: '123-123-123',
-            item: {
-              name: 'test order',
-              description: 'this is my test item',
-              id: '123456',
-              quantity: 1,
-              price: 100
-            }
+            item: items[0]
           }),
-        }
-      )
-        .then((data) => data.json())
-        .then((res) => {
-         console.log(res);
         })
-        .catch((e) => console.error(e));
+          .then((data) => data.json())
+          .then((res) => {
+            window.orderIdCreated = res.orderId;
+          })
+          .catch((e) => console.error(e));
+      } else {
+        const item = items[0];
+        item.price = items.reduce((a, n) => {
+          a = a + Number(n.price);
+          return a;
+        }, 0)
+        fetch('/app-market-payment-service-server/v1/order', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: window.wixEmbedsAPI.getAppToken(
+              '7cbc47b3-cfc6-4d20-a13d-40cd1521378b'
+            ),
+          },
+          body: JSON.stringify({
+            accountId: `7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
+            amount: item.price,
+            currency: 'EUR',
+            appOrderId: '123-123-123',
+            item: item
+          }),
+        })
+          .then((data) => data.json())
+          .then((res) => {
+            window.orderIdCreated = res.orderId;
+          })
+          .catch((e) => console.error(e));
+      }
     };
 
     doCheckout2 = () => {
