@@ -106,6 +106,7 @@ router.post('/checkout-url', async (req, res) => {
 });
 router.post('/test-instance', async (req, res) => {
   const { instanceId } = req.body;
+  try {
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.find({ instanceId }).toArray();
   const refreshResponse = await axios.post(refreshAccessUrl, {
@@ -117,6 +118,11 @@ router.post('/test-instance', async (req, res) => {
 
   const { access_token } = refreshResponse.data;
   res.json({access_token});
+
+  } catch (e) {
+    res.json({e});
+  }
+  
   // try {
   //   return axios.post('/app-makret-payment-service-server/v1/order', {
   //     method: 'post',
