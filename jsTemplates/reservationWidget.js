@@ -137,7 +137,7 @@ function load() {
           a = a + Number(n.price);
           return a;
         }, 0)
-        fetch('/app-market-payment-service-server/v1/order', {
+        fetch('/app-market-payment-service-server/v1/item/update', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
