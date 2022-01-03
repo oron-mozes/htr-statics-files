@@ -159,6 +159,9 @@ function load() {
       }
     };
 
+
+
+
     doCheckout2 = () => {
       const wixconfig = JSON.parse(this?.attributes?.wixconfig?.value || '{}');
       const authorization = window.wixEmbedsAPI.getAppToken(
@@ -282,6 +285,7 @@ function load() {
     };
     render() {
       return `
+        <iframe src="/payments-client" width="200" height="200"/>
         <div style="display: flex;
             justify-content: center;
             flex-direction: column;
