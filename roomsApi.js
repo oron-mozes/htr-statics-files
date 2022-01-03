@@ -111,7 +111,7 @@ router.post('/test-instance', async (req, res) => {
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.find({ instanceId }).toArray();
   const refreshResponse = await axios.post(refreshAccessUrl, {
-    grant_type: 'refresh_token',
+    grant_type: 'authorization_code',
     client_id: appId,
     client_secret: appSecret,
     refresh_token: installation[0].refresh_token,
