@@ -118,6 +118,9 @@ router.post('/test-instance', async (req, res) => {
   });
 
   const { access_token } = refreshResponse.data;
+  try {
+
+  
   const {siteOwnerId, siteMemberId} = jwt.decode(access_token);
   // res.json({access_token});
 
@@ -125,6 +128,9 @@ router.post('/test-instance', async (req, res) => {
   //   res.json({e});
   // }
   res.json({token: jwt.sign({...data, siteOwnerId, siteMemberId}, instanceId)})
+  } catch (e) {
+    res.json(e);
+  }
   // try {
   //   return axios.post('/app-makret-payment-service-server/v1/order', {
   //     method: 'post',
