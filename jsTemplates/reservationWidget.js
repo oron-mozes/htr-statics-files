@@ -293,9 +293,11 @@ function load() {
         .then((response) => {
           console.log(':::instance ::', response);
           const ifr = document.createElement('iframe');
+          ifr.id ="myCheckoutModal";
           ifr.width = '600';
           ifr.height = '600';
           ifr.src = `/payments-client?token=${response.token}&instance=${userInstance}`;
+          document.body.appendChild(ifr)
         })
         .catch((e) => console.error(e));
     };
