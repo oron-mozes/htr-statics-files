@@ -108,7 +108,8 @@ router.post('/checkout-url', async (req, res) => {
 });
 router.post('/test-instance', async (req, res) => {
   const { data ,instanceId } = req.body;
- 
+  const instalactionC = req.DBManager.db.collection(installCollection);
+
     const installation = await instalactionC.find({ instanceId }).toArray();
 
 
