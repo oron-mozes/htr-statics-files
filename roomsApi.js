@@ -8,7 +8,7 @@ const appId = '7cbc47b3-cfc6-4d20-a13d-40cd1521378b';
 const refreshAccessUrl = 'https://www.wix.com/oauth/access';
 const appSecret = 'f3d6e2dd-3d64-4878-b523-624bd20772c1';
 const axios = require('axios');
-const jose = require('jose')
+const jwt = require('jsonwebtoken')
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -123,7 +123,7 @@ router.post('/test-instance', async (req, res) => {
   // } catch (e) {
   //   res.json({e});
   // }
-  res.json({token: await new jose.EncryptJWT(data).encrypt(instanceId)})
+  res.json({token: jwt.sign(data, instanceId)})
   // try {
   //   return axios.post('/app-makret-payment-service-server/v1/order', {
   //     method: 'post',
