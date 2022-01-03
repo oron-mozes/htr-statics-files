@@ -9,6 +9,7 @@ const refreshAccessUrl = 'https://www.wix.com/oauth/access';
 const appSecret = 'f3d6e2dd-3d64-4878-b523-624bd20772c1';
 const axios = require('axios');
 const jwt = require('jsonwebtoken')
+const accessUrl = 'https://www.wix.com/oauth/access';
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -108,16 +109,19 @@ router.post('/checkout-url', async (req, res) => {
 router.post('/test-instance', async (req, res) => {
   const { data ,instanceId } = req.body;
   try {
-  const instalactionC = req.DBManager.db.collection(installCollection);
-  const installation = await instalactionC.find({ instanceId }).toArray();
-  const refreshResponse = await axios.post(refreshAccessUrl, {
-    grant_type: 'refresh_token',
-    client_id: appId,
-    client_secret: appSecret,
-    refresh_token: installation[0].refresh_token,
-  });
+    const installation = await instalactionC.find({ instanceId }).toArray();
 
-  const { access_token } = refreshResponse.data;
+
+    const response = await axios.post(accessUrl, {
+      "grant_type": "authorization_code",
+      "client_id": appId,
+      "client_secret": appSecret,
+      code: installation[0].access_token
+    })
+    const installsC = req.DBManager.db.collection(installCollection);
+    const {refresh_token, access_token} = response.data;
+    await installsC.updateOne({instanceId, refresh_token, access_token}, {$set: {refresh_token, access_token}}, {upsert: true})
+    console.log('access_token::', access_token, response.data);
 
 
   
