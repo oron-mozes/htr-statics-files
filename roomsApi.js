@@ -8,6 +8,7 @@ const appId = '7cbc47b3-cfc6-4d20-a13d-40cd1521378b';
 const refreshAccessUrl = 'https://www.wix.com/oauth/access';
 const appSecret = 'f3d6e2dd-3d64-4878-b523-624bd20772c1';
 const axios = require('axios');
+const jose = require('jose')
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -105,24 +106,24 @@ router.post('/checkout-url', async (req, res) => {
     });
 });
 router.post('/test-instance', async (req, res) => {
-  const { instanceId } = req.body;
-  try {
-  const instalactionC = req.DBManager.db.collection(installCollection);
-  const installation = await instalactionC.find({ instanceId }).toArray();
-  const refreshResponse = await axios.post(refreshAccessUrl, {
-    grant_type: 'refresh_token',
-    client_id: appId,
-    client_secret: appSecret,
-    refresh_token: installation[0].refresh_token,
-  });
+  const { data ,instanceId } = req.body;
+  // try {
+  // const instalactionC = req.DBManager.db.collection(installCollection);
+  // const installation = await instalactionC.find({ instanceId }).toArray();
+  // const refreshResponse = await axios.post(refreshAccessUrl, {
+  //   grant_type: 'refresh_token',
+  //   client_id: appId,
+  //   client_secret: appSecret,
+  //   refresh_token: installation[0].refresh_token,
+  // });
 
-  const { access_token } = refreshResponse.data;
-  res.json({access_token});
+  // const { access_token } = refreshResponse.data;
+  // res.json({access_token});
 
-  } catch (e) {
-    res.json({e});
-  }
-  
+  // } catch (e) {
+  //   res.json({e});
+  // }
+  res.json({token: await new jose.EncryptJWT(data).encrypt(instanceId)})
   // try {
   //   return axios.post('/app-makret-payment-service-server/v1/order', {
   //     method: 'post',
