@@ -111,6 +111,7 @@ router.post('/test-instance', async (req, res) => {
   const instalactionC = req.DBManager.db.collection(installCollection);
 
     const installation = await instalactionC.find({ instanceId }).toArray();
+    console.log('access_token1::',installation);
 
 
     const response = await axios.post(accessUrl, {
