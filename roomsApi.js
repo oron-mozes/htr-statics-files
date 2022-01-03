@@ -108,22 +108,23 @@ router.post('/checkout-url', async (req, res) => {
 router.post('/test-instance', async (req, res) => {
   const { data ,instanceId } = req.body;
   // try {
-  // const instalactionC = req.DBManager.db.collection(installCollection);
-  // const installation = await instalactionC.find({ instanceId }).toArray();
-  // const refreshResponse = await axios.post(refreshAccessUrl, {
-  //   grant_type: 'refresh_token',
-  //   client_id: appId,
-  //   client_secret: appSecret,
-  //   refresh_token: installation[0].refresh_token,
-  // });
+  const instalactionC = req.DBManager.db.collection(installCollection);
+  const installation = await instalactionC.find({ instanceId }).toArray();
+  const refreshResponse = await axios.post(refreshAccessUrl, {
+    grant_type: 'refresh_token',
+    client_id: appId,
+    client_secret: appSecret,
+    refresh_token: installation[0].refresh_token,
+  });
 
-  // const { access_token } = refreshResponse.data;
+  const { access_token } = refreshResponse.data;
+  const {siteOwnerId, siteMemberId} = jwt.decode(access_token);
   // res.json({access_token});
 
   // } catch (e) {
   //   res.json({e});
   // }
-  res.json({token: jwt.sign(data, instanceId)})
+  res.json({token: jwt.sign({...data, siteOwnerId, siteMemberId}, instanceId)})
   // try {
   //   return axios.post('/app-makret-payment-service-server/v1/order', {
   //     method: 'post',
