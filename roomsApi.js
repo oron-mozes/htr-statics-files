@@ -108,7 +108,7 @@ router.post('/checkout-url', async (req, res) => {
 });
 router.post('/test-instance', async (req, res) => {
   const { data ,instanceId } = req.body;
-  try {
+ 
     const installation = await instalactionC.find({ instanceId }).toArray();
 
 
@@ -132,9 +132,7 @@ router.post('/test-instance', async (req, res) => {
   //   res.json({e});
   // }
   res.json({token: jwt.sign({...data, siteOwnerId, siteMemberId}, instanceId)})
-  } catch (e) {
-    res.json(e);
-  }
+ 
   // try {
   //   return axios.post('/app-makret-payment-service-server/v1/order', {
   //     method: 'post',
