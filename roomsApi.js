@@ -107,7 +107,7 @@ router.post('/checkout-url', async (req, res) => {
 });
 router.post('/test-instance', async (req, res) => {
   const { data ,instanceId } = req.body;
-  // try {
+  try {
   const instalactionC = req.DBManager.db.collection(installCollection);
   const installation = await instalactionC.find({ instanceId }).toArray();
   const refreshResponse = await axios.post(refreshAccessUrl, {
@@ -118,7 +118,7 @@ router.post('/test-instance', async (req, res) => {
   });
 
   const { access_token } = refreshResponse.data;
-  try {
+  
 
   
   const {siteOwnerId, siteMemberId} = jwt.decode(access_token);
