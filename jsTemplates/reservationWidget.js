@@ -300,7 +300,7 @@ function load() {
           ifr.height = '600';
           ifr.src = `/payments-client?token=${window.wixEmbedsAPI.getAppToken(
             '7cbc47b3-cfc6-4d20-a13d-40cd1521378b'
-          )}&instance=${userInstance}&locale=${window.wixEmbedsAPI.getLanguage()}orderId=${window.orderIdCreated}`;
+          )}&instance=${userInstance}&locale=${window.wixEmbedsAPI.getLanguage()}&orderId=${window.orderIdCreated}`;
           document.body.appendChild(ifr)
         // })
         // .catch((e) => console.error(e));
