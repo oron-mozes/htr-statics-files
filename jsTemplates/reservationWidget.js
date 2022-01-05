@@ -273,27 +273,17 @@ function load() {
         quantity: order.quantity,
         price: Number(order.roomDetails.price),
       }));
-      // fetch(`${baseUrl}/test-instance`, {
-      //   method: 'post',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     instanceId: userInstance,
-      //     data: {
-      //       locale: 'en',
-      //       amount: items[0].price.toString(),
-      //       appId: '7cbc47b3-cfc6-4d20-a13d-40cd1521378b',
-      //       appInstanceId: userInstance,
-      //       currency: 'EUR',
-      //       msid: wixEmbedsAPI.getHtmlSiteId(),
-      //       visitorId: authorization.aid
-      //     },
-      //   }),
-      // })
-      //   .then((data) => data.json())
-      //   .then((response) => {
-          // console.log(':::instance ::', response);
+      fetch(`/app-makret-payment-service-server/v1/order?orderId=${window.orderIdCreated}`, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          console.log(':::instance ::', response);
+
+        });
           const ifr = document.createElement('iframe');
           ifr.id ="myCheckoutModal";
           ifr.width = '600';
