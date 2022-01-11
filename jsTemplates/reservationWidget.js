@@ -60,6 +60,7 @@ function load() {
       this.updateState(wixconfig);
     }
     getEvents = (event, data) => {
+      console.info(this.id)
       if (
         (event === 'CustomEvent' && data.eventCategory === 'Site members') ||
         event === 'PageView'
