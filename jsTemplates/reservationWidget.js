@@ -122,7 +122,7 @@ function load() {
             accountId: `7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
             amount: items[0].price.toString(),
             currency: 'EUR',
-            appOrderId: '123-123-123',
+            appOrderId: '123-123-1234',
             item: items[0],
           }),
         })
