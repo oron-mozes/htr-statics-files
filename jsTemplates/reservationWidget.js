@@ -265,33 +265,35 @@ function load() {
     };
 
     doInstance = () => {
-      const {authorization} = this.state;
-      const items = this.state.orders.map((order) => ({
-        name: order.roomDetails.name,
-        description: order.roomDetails.description,
-        id: order.orderId,
-        quantity: order.quantity,
-        price: Number(order.roomDetails.price),
-      }));
-      fetch(`/app-makret-payment-service-server/v1/order?orderId=${window.orderIdCreated}`, {
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((data) => data.json())
-        .then((response) => {
-          console.log(':::instance ::', response);
+      this.dispatchEvent(new CustomEvent('startPayment', {detail:{orderId: window.orderIdCreated}}));
 
-        });
-          const ifr = document.createElement('iframe');
-          ifr.id ="myCheckoutModal";
-          ifr.width = '600';
-          ifr.height = '600';
-          ifr.src = `/payments-client?token=${window.wixEmbedsAPI.getAppToken(
-            '7cbc47b3-cfc6-4d20-a13d-40cd1521378b'
-          )}&instance=${userInstance}&locale=${window.wixEmbedsAPI.getLanguage()}&orderId=${window.orderIdCreated}`;
-          document.body.appendChild(ifr)
+      // const {authorization} = this.state;
+      // const items = this.state.orders.map((order) => ({
+      //   name: order.roomDetails.name,
+      //   description: order.roomDetails.description,
+      //   id: order.orderId,
+      //   quantity: order.quantity,
+      //   price: Number(order.roomDetails.price),
+      // }));
+      // fetch(`/app-makret-payment-service-server/v1/order?orderId=${window.orderIdCreated}`, {
+      //   method: 'get',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // })
+      //   .then((data) => data.json())
+      //   .then((response) => {
+      //     console.log(':::instance ::', response);
+
+      //   });
+      //     const ifr = document.createElement('iframe');
+      //     ifr.id ="myCheckoutModal";
+      //     ifr.width = '600';
+      //     ifr.height = '600';
+      //     ifr.src = `/payments-client?token=${window.wixEmbedsAPI.getAppToken(
+      //       '7cbc47b3-cfc6-4d20-a13d-40cd1521378b'
+      //     )}&instance=${userInstance}&locale=${window.wixEmbedsAPI.getLanguage()}&orderId=${window.orderIdCreated}`;
+      //     document.body.appendChild(ifr)
         // })
         // .catch((e) => console.error(e));
     };
