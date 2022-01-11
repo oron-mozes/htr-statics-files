@@ -268,7 +268,11 @@ function load() {
       this.dispatchEvent(new CustomEvent('startPayment', {detail:{orderId: window.orderIdCreated, userInfo: {
         firstName: 'Oron', lastName: 'Mozes', country: 'ISR', phone: '0504444444', email: 'test@test.com'
       }}}));
-
+      this.addEventListener('payment', (event) => {
+        console.log(event);
+        debugger;
+        
+      })
       // const {authorization} = this.state;
       // const items = this.state.orders.map((order) => ({
       //   name: order.roomDetails.name,
