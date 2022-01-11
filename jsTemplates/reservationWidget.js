@@ -147,7 +147,7 @@ function load() {
           },
           body: JSON.stringify({
             orderId: window.orderIdCreated,
-            appOrderId: '123-123-123',
+            appOrderId: '123-123-1234',
             item: item,
           }),
         })
