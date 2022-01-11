@@ -60,7 +60,11 @@ function load() {
       this.updateState(wixconfig);
     }
     getEvents = (event, data) => {
-      console.info(this.id)
+      const myDirectEvents = event.includes(this.parentElement.id);
+      const eventType = event.replace(`${this.parentElement.id}|`, '');
+      if(myDirectEvents && eventType === 'payments') {
+        console.log({data})
+      }
       if (
         (event === 'CustomEvent' && data.eventCategory === 'Site members') ||
         event === 'PageView'
