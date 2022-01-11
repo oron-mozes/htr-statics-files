@@ -265,7 +265,9 @@ function load() {
     };
 
     doInstance = () => {
-      this.dispatchEvent(new CustomEvent('startPayment', {detail:{orderId: window.orderIdCreated}}));
+      this.dispatchEvent(new CustomEvent('startPayment', {detail:{orderId: window.orderIdCreated, userInfo: {
+        firstName: 'Oron', lastName: 'Mozes', country: 'IL', phone: '0504444444', email: 'test@test.com'
+      }}}));
 
       // const {authorization} = this.state;
       // const items = this.state.orders.map((order) => ({
