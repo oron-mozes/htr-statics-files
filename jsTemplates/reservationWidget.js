@@ -127,7 +127,7 @@ function load() {
             accountId: `7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
             amount: items[0].price.toString(),
             currency: 'EUR',
-            appOrderId: '123-123-1234',
+            appOrderId: '1243-123-123',
             item: items[0],
           }),
         })
@@ -152,7 +152,7 @@ function load() {
           },
           body: JSON.stringify({
             orderId: window.orderIdCreated,
-            appOrderId: '123-123-1234',
+            appOrderId: '123-123-1235',
             item: item,
           }),
         })
