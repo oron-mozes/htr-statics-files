@@ -127,7 +127,7 @@ function load() {
             accountId: `7cbc47b3-cfc6-4d20-a13d-40cd1521378b:${userInstance}`,
             amount: items[0].price.toString(),
             currency: 'EUR',
-            appOrderId: '1243-123-123',
+            appOrderId: '1243-123-1236',
             item: items[0],
           }),
         })
@@ -152,7 +152,7 @@ function load() {
           },
           body: JSON.stringify({
             orderId: window.orderIdCreated,
-            appOrderId: '123-123-1235',
+            appOrderId: '123-123-1236',
             item: item,
           }),
         })
@@ -270,14 +270,12 @@ function load() {
     };
 
     doInstance = () => {
-      this.dispatchEvent(new CustomEvent('startPayment', {detail:{orderId: window.orderIdCreated, userInfo: {
+      this.dispatchEvent(new CustomEvent('startPayment', {detail:{
+        orderId: window.orderIdCreated, 
+        userInfo: {
         firstName: 'Oron', lastName: 'Mozes', country: 'ISR', phone: '0504444444', email: 'test@test.com'
       }}}));
-      this.addEventListener('payment', (event) => {
-        console.log(event);
-        debugger;
-        
-      })
+     
       // const {authorization} = this.state;
       // const items = this.state.orders.map((order) => ({
       //   name: order.roomDetails.name,
